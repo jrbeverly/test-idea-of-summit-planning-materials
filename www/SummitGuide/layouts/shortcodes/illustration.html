@@ -1,0 +1,26 @@
+{{/*
+  Inline an SVG illustration from content/markdown.
+
+  Parameters:
+    0 — path relative to assets/illustrations/, e.g. "spot/suitcase"
+    1 — optional CSS class(es)
+
+  Usage in markdown:
+    {{< illustration "spot/suitcase" "illustration--sm" >}}
+*/}}
+
+{{ $name := .Get 0 }}
+{{ $class := .Get 1 | default "" }}
+
+{{ $path := printf "illustrations/%s.svg" $name }}
+{{ $svg := resources.Get $path }}
+
+{{ if $svg }}
+  {{ if $class }}
+    {{ (replaceRE "<svg" (printf "<svg class=\"%s\"" $class) ($svg.Content)) | safeHTML }}
+  {{ else }}
+    {{ $svg.Content | safeHTML }}
+  {{ end }}
+{{ else }}
+  {{ errorf "illustration shortcode: asset not found at assets/%s" $path }}
+{{ end }}

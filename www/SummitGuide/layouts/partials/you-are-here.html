@@ -1,0 +1,11 @@
+{{/* "You are here" orientation marker for map pages. Visual system spec §7.6:
+stamp-colored pin icon with label positioned at the attendee's default starting
+point (main entrance / welcome desk). Include once per map-view spread from the
+map template. */}}
+<div class="sg-you-are-here" role="note" aria-label="You are here">
+  <span class="sg-you-are-here__pin" aria-hidden="true">
+    {{ partial "illustration" (dict "name" "icons/pin" "class"
+    "sg-you-are-here__pin-icon") }}
+  </span>
+  <span class="sg-you-are-here__label">You are here</span>
+</div>

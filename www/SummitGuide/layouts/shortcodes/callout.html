@@ -1,0 +1,3 @@
+{{/* Callout shortcode — for use in Markdown content. Usage: {{< callout
+text="The callout content." attribution="— Section 4" >}} */}} {{ partial
+"callout" (dict "text" (.Get "text") "attribution" (.Get "attribution")) }}

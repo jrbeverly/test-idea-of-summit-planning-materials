@@ -1,0 +1,3 @@
+{{/* Stamp shortcode — for use in Markdown content. Usage: {{< stamp
+text="IMPORTANT" shape="rectangle" >}} */}} {{ $shape := .Get "shape" | default
+"rectangle" }} {{ partial "stamp" (dict "text" (.Get "text") "shape" $shape) }}

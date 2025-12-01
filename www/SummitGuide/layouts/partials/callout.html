@@ -1,0 +1,12 @@
+{{/* Callout — pulled quote, emphasis block, or highlighted passage. Visual
+system spec §1.5: italic body text with a left rule on a subtle panel.
+Parameters (dict): text — callout text (required) attribution — optional
+attribution line in mono below the text Usage from template: {{ partial
+"callout" (dict "text" "This is the callout text." "attribution" "— Section 4")
+}} */}} {{ $text := .text }} {{ $attribution := .attribution | default "" }}
+<aside class="sg-callout" role="complementary">
+  <span class="sg-callout__text">{{ $text | markdownify }}</span>
+  {{ with $attribution }}
+  <span class="sg-callout__attribution">{{ . }}</span>
+  {{ end }}
+</aside>

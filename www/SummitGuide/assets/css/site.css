@@ -1,0 +1,1310 @@
+/* Summit Guide — site styles.
+   All colors consumed from design tokens (data/design/ → tokens.css).
+   No raw hex values.
+
+   Performance budgets (per page, uncompressed):
+     Fonts:           213 KB (3 self-hosted woff2 families, Latin subset)
+     Illustrations:    41 KB (37 inline SVGs, svgo-optimized)
+     CSS:              28 KB (site.css + tokens.css + fonts.css, Hugo-minified)
+     JS:                4 KB (toc-drawer.js, vanilla, Hugo-minified)
+     Total transfer:  < 500 KB (warm cache: ~0 KB)
+
+   Font loading strategy:
+     body/display: Newsreader variable (preloaded, font-display: swap)
+     mono/UI:      Space Mono 400 (preloaded, font-display: swap)
+     annotation:   Caveat (font-display: swap, decorative — no preload) */
+
+/* ── Base reset ── */
+body {
+  margin: 0;
+}
+
+/* ── Guide wrapper (scoped to .sg-guide on <html>) ── */
+.sg-guide {
+  color: var(--sg-color-ink);
+  background: var(--sg-color-paper);
+  font-family: var(--sg-font-body);
+}
+
+/* ── Viewport surface (the "table" the booklet rests on) §2.4 ── */
+.sg-body {
+  background: var(--sg-color-paper-dark);
+}
+
+/* ── Skip link ── */
+.sg-skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: var(--sg-space-xs) var(--sg-space-sm);
+  background: var(--sg-color-surface);
+  color: var(--sg-color-link);
+  z-index: 1000;
+}
+
+.sg-skip-link:focus {
+  top: 0;
+}
+
+/* ── Journey breadcrumb §7.2 ── */
+.sg-breadcrumb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: var(--sg-space-sm);
+  padding: var(--sg-space-xs) var(--sg-space-sm);
+  background: var(--sg-color-surface);
+  border-bottom: 1px solid var(--sg-color-rule-light);
+}
+
+.sg-breadcrumb__segments {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sg-breadcrumb__dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sg-color-rule);
+}
+
+.sg-breadcrumb__segment--visited .sg-breadcrumb__dot {
+  background: var(--sg-color-ink-muted);
+}
+
+.sg-breadcrumb__segment--current .sg-breadcrumb__dot {
+  background: var(--sg-color-stamp);
+}
+
+.sg-breadcrumb__label {
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  color: var(--sg-color-ink-muted);
+}
+
+/* ── ToC trigger button ── */
+.sg-toc-trigger {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  gap: var(--sg-space-xs);
+  padding: var(--sg-space-xs) var(--sg-space-sm);
+  border: none;
+  background: none;
+  color: var(--sg-color-ink-muted);
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  cursor: pointer;
+}
+
+.sg-toc-trigger:hover {
+  color: var(--sg-color-ink);
+}
+
+/* ── ToC / Key drawer ── */
+.sg-toc-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  width: min(24rem, 85vw);
+  background: var(--sg-color-surface);
+  box-shadow: var(--sg-shadow-sm);
+  border-radius: var(--sg-radius-md) 0 0 var(--sg-radius-md);
+}
+
+.sg-toc-drawer__panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sg-toc-drawer__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--sg-color-rule-light);
+}
+
+.sg-toc-drawer__tab {
+  flex: 1;
+  padding: var(--sg-space-sm);
+  border: none;
+  background: none;
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  color: var(--sg-color-ink-muted);
+  cursor: pointer;
+}
+
+.sg-toc-drawer__tab[aria-selected='true'] {
+  color: var(--sg-color-ink);
+  border-bottom: 2px solid var(--sg-color-stamp);
+}
+
+.sg-toc-drawer__panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sg-space-md);
+}
+
+/* ── ToC list ── */
+.sg-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sg-toc-list__item {
+  border-left: 3px solid transparent;
+  padding: var(--sg-space-sm);
+}
+
+.sg-toc-list__item--current {
+  border-left-color: var(--sg-color-stamp);
+  background: var(--sg-color-paper-dark);
+}
+
+.sg-toc-list__link {
+  display: flex;
+  gap: var(--sg-space-sm);
+  color: var(--sg-color-ink);
+  text-decoration: none;
+  font-size: var(--sg-font-size-body);
+}
+
+.sg-toc-list__number {
+  font-family: var(--sg-font-mono);
+  color: var(--sg-color-stamp);
+}
+
+.sg-toc-list__item:not(.sg-toc-list__item--current) .sg-toc-list__number {
+  color: var(--sg-color-ink-muted);
+}
+
+/* ── Main content ── */
+#sg-main {
+  padding-top: 40px; /* breadcrumb clearance */
+}
+
+/* ── Spread container ── */
+.sg-spread {
+  max-width: var(--sg-spread-width);
+  margin: var(--sg-space-md) auto;
+  background: var(--sg-color-paper);
+  border-radius: var(--sg-radius-page);
+  box-shadow: var(--sg-shadow-spread);
+  position: relative;
+}
+
+.sg-spread--two-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.sg-spread__gutter {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--sg-color-rule-light) 10%,
+    var(--sg-color-rule-light) 90%,
+    transparent
+  );
+}
+
+/* ── Page (inside a spread or standalone) ── */
+.sg-page {
+  padding: var(--sg-page-padding-block) var(--sg-page-padding-inline);
+  position: relative;
+}
+
+.sg-page--single {
+  max-width: var(--sg-page-width);
+  margin: var(--sg-space-md) auto;
+  background: var(--sg-color-paper);
+  border-radius: var(--sg-radius-page);
+  box-shadow: var(--sg-shadow-spread);
+}
+
+/* ── Section landing ── */
+.sg-section-landing__number {
+  font-family: var(--sg-font-display);
+  font-size: var(--sg-font-size-display-xl);
+  font-weight: var(--sg-font-weight-display);
+  color: var(--sg-color-stamp);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  display: block;
+  line-height: var(--sg-leading-display);
+}
+
+.sg-section-landing__title {
+  font-family: var(--sg-font-display);
+  font-size: var(--sg-font-size-display-lg);
+  font-weight: var(--sg-font-weight-display);
+  color: var(--sg-color-ink);
+  line-height: var(--sg-leading-display);
+  margin: var(--sg-space-sm) 0;
+}
+
+.sg-section-landing__summary {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  color: var(--sg-color-ink-muted);
+  font-style: italic;
+}
+
+/* ── Guide cover ── */
+.sg-guide-cover__title {
+  font-family: var(--sg-font-display);
+  font-size: var(--sg-font-size-display-lg);
+  font-weight: var(--sg-font-weight-display);
+  color: var(--sg-color-ink);
+  line-height: var(--sg-leading-display);
+}
+
+.sg-guide-cover__summary {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body);
+  color: var(--sg-color-ink-muted);
+}
+
+/* ── Spread header (used within spreads) ── */
+.sg-spread-header__title {
+  font-family: var(--sg-font-display);
+  font-size: var(--sg-font-size-display-md);
+  font-weight: var(--sg-font-weight-heading);
+  color: var(--sg-color-ink);
+  line-height: var(--sg-leading-heading);
+  margin: 0 0 var(--sg-space-xs);
+}
+
+.sg-spread-header__summary {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  color: var(--sg-color-ink-muted);
+  font-style: italic;
+  margin: 0 0 var(--sg-space-md);
+}
+
+/* ── Page body ── */
+.sg-page__body {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body);
+  font-weight: var(--sg-font-weight-body);
+  line-height: var(--sg-leading-body);
+  color: var(--sg-color-ink);
+}
+
+/* ── Page number §7.1 ── */
+.sg-page__number {
+  position: absolute;
+  bottom: var(--sg-space-sm);
+}
+
+.sg-page--left .sg-page__number {
+  right: var(--sg-space-sm);
+}
+
+.sg-page--right .sg-page__number {
+  left: var(--sg-space-sm);
+}
+
+.sg-page--single .sg-page__number {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sg-page__number-text {
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-page-number);
+  color: var(--sg-color-ink-muted);
+}
+
+/* ── Marginalia ── */
+.sg-marginalia {
+  font-family: var(--sg-font-annotation);
+}
+
+.sg-marginalia__note {
+  font-size: var(--sg-font-size-marginalia);
+  font-weight: var(--sg-font-weight-annotation);
+  line-height: var(--sg-leading-marginalia);
+  color: var(--sg-color-annotation-ink);
+  margin: 0 0 var(--sg-space-xs);
+}
+
+/* ── Section nav (prev/next) §7.5 ── */
+.sg-section-nav {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--sg-page-width);
+  margin: var(--sg-space-lg) auto;
+  padding: 0 var(--sg-page-padding-inline);
+}
+
+.sg-section-nav__prev,
+.sg-section-nav__next {
+  text-decoration: none;
+  color: var(--sg-color-ink-muted);
+  font-size: var(--sg-font-size-body-sm);
+}
+
+.sg-section-nav__prev:hover,
+.sg-section-nav__next:hover {
+  color: var(--sg-color-ink);
+}
+
+.sg-section-nav__label {
+  display: block;
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+}
+
+.sg-section-nav__title {
+  display: block;
+}
+
+/* ── Support footer (cross-cutting X3) ── */
+.sg-support {
+  border-top: 1px solid var(--sg-color-rule);
+  padding: var(--sg-space-md) var(--sg-page-padding-inline);
+  max-width: var(--sg-page-width);
+  margin: var(--sg-space-section-gap) auto 0;
+  font-size: var(--sg-font-size-body-sm);
+  color: var(--sg-color-ink-muted);
+}
+
+.sg-support__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sg-space-sm) var(--sg-space-md);
+}
+
+.sg-support__label {
+  font-weight: var(--sg-font-weight-strong);
+  color: var(--sg-color-ink);
+}
+
+.sg-support__help {
+  width: 100%;
+  margin-top: var(--sg-space-xs);
+  color: var(--sg-color-ink);
+}
+
+/* ── Links ── */
+.sg-guide a {
+  color: var(--sg-color-link);
+}
+
+.sg-guide a:visited {
+  color: var(--sg-color-link-visited);
+}
+
+/* ── Horizontal rules ── */
+.sg-guide hr {
+  border: none;
+  border-top: 1px solid var(--sg-color-rule);
+}
+
+/* ── Map §6.1: Map View ── */
+
+/* Map spread container */
+.sg-spread--map-view {
+  /* Allow the map to use more horizontal space */
+}
+
+/* Left page — map dominates */
+.sg-page--map .sg-page__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sg-space-md);
+}
+
+/* Map container */
+.sg-map {
+  color: var(--sg-color-map-line);
+}
+
+/* Map canvas — inline SVG container */
+.sg-map__canvas {
+  width: 100%;
+  margin: var(--sg-space-sm) 0;
+  position: relative;
+}
+
+.sg-map__canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+}
+
+/* Placeholder for missing maps */
+.sg-map__placeholder {
+  background: var(--sg-color-paper-dark);
+  border: 2px dashed var(--sg-color-rule);
+  border-radius: var(--sg-radius-sm);
+  aspect-ratio: 4 / 3;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sg-map__placeholder::after {
+  content: 'Map illustration';
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  color: var(--sg-color-ink-muted);
+}
+
+/* Callout directory — ordered list below the map */
+.sg-map__callouts {
+  list-style: none;
+  margin: var(--sg-space-md) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sg-space-xs) var(--sg-space-md);
+  border-top: 1px solid var(--sg-color-rule-light);
+  padding-top: var(--sg-space-sm);
+}
+
+.sg-map__callout {
+  display: flex;
+  gap: var(--sg-space-xs);
+  align-items: baseline;
+  padding: var(--sg-space-xs) 0;
+}
+
+.sg-map__callout-marker {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--sg-color-stamp);
+  color: var(--sg-color-stamp-ink);
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  font-weight: var(--sg-font-weight-mono-bold);
+  line-height: 1;
+}
+
+.sg-map__callout-name {
+  font-family: var(--sg-font-display);
+  font-size: var(--sg-font-size-body-sm);
+  font-weight: var(--sg-font-weight-heading);
+  color: var(--sg-color-ink);
+  line-height: var(--sg-leading-compact);
+}
+
+.sg-map__callout-desc {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-caption);
+  color: var(--sg-color-ink-muted);
+  line-height: var(--sg-leading-compact);
+  font-style: italic;
+}
+
+/* Map key — in-map key places list */
+.sg-map__key {
+  margin-top: var(--sg-space-sm);
+  border-top: 1px solid var(--sg-color-rule-light);
+  padding-top: var(--sg-space-sm);
+}
+
+.sg-map__key-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sg-space-xs) var(--sg-space-md);
+}
+
+.sg-map__key-entry {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+}
+
+.sg-map__key-marker {
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  color: var(--sg-color-stamp);
+  font-weight: var(--sg-font-weight-mono-bold);
+}
+
+.sg-map__key-name {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-caption);
+  color: var(--sg-color-ink-muted);
+}
+
+/* Right page — icon legend */
+.sg-page--map-legend .sg-page__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sg-space-md);
+}
+
+.sg-map__icons {
+  margin-top: var(--sg-space-sm);
+}
+
+.sg-map__icon-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sg-space-xs) var(--sg-space-sm);
+}
+
+.sg-map__icon-entry {
+  display: flex;
+  gap: var(--sg-space-xs);
+  align-items: center;
+  padding: var(--sg-space-xs) 0;
+  border-bottom: 1px solid var(--sg-color-rule-light);
+}
+
+.sg-map__icon-slot {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--sg-color-ink-muted);
+}
+
+.sg-map__icon-img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.sg-map__icon-meaning {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  color: var(--sg-color-ink);
+  line-height: var(--sg-leading-compact);
+}
+
+/* "You are here" marker */
+.sg-you-are-here {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--sg-space-sm);
+  padding: var(--sg-space-xs) var(--sg-space-sm);
+  background: var(--sg-color-surface);
+  border: 1px solid var(--sg-color-stamp);
+  border-radius: var(--sg-radius-sm);
+  width: fit-content;
+  box-shadow: var(--sg-shadow-stamp);
+}
+
+.sg-you-are-here__pin {
+  display: inline-flex;
+  align-items: center;
+  color: var(--sg-color-stamp);
+}
+
+.sg-you-are-here__pin-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.sg-you-are-here__label {
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  font-weight: var(--sg-font-weight-mono-bold);
+  color: var(--sg-color-stamp);
+  letter-spacing: 0.03em;
+}
+
+/* Map page specific adjustments */
+.sg-page--map .sg-page__number {
+  bottom: var(--sg-space-sm);
+}
+
+.sg-page--map-legend .sg-page__number {
+  bottom: var(--sg-space-sm);
+}
+
+/* Map SVG styling — ensure map labels are readable */
+.sg-map__canvas svg text {
+  font-family: var(--sg-font-mono), 'Courier New', monospace;
+}
+
+/* ── Callout (pulled quote / emphasis block) §1.5 ── */
+.sg-callout {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-callout);
+  font-weight: var(--sg-font-weight-body-italic);
+  line-height: var(--sg-leading-body);
+  color: var(--sg-color-ink);
+  font-style: italic;
+  margin: var(--sg-space-md) 0;
+  padding: var(--sg-space-sm) var(--sg-space-md);
+  border-left: 3px solid var(--sg-color-rule);
+  background: var(--sg-color-paper-dark);
+  border-radius: 0 var(--sg-radius-sm) var(--sg-radius-sm) 0;
+}
+
+.sg-callout__attribution {
+  display: block;
+  margin-top: var(--sg-space-xs);
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  font-weight: var(--sg-font-weight-mono);
+  color: var(--sg-color-ink-muted);
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Stamp (rubber-stamp marker) §1.5, §6.1 ── */
+.sg-stamp {
+  display: inline-block;
+  padding: var(--sg-space-xs) var(--sg-space-sm);
+  background: var(--sg-color-stamp);
+  color: var(--sg-color-stamp-ink);
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-stamp);
+  font-weight: var(--sg-font-weight-mono-bold);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transform: rotate(-2deg);
+  box-shadow: var(--sg-shadow-stamp);
+  border-radius: var(--sg-radius-sm);
+  user-select: none;
+}
+
+.sg-stamp--circle {
+  border-radius: 50%;
+  padding: var(--sg-space-sm);
+  min-width: 3.5em;
+  min-height: 3.5em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-5deg);
+}
+
+/* ── Traveller's Note (sticky-note / margin box) §1.5 ── */
+.sg-travellers-note {
+  font-family: var(--sg-font-annotation);
+  font-size: var(--sg-font-size-marginalia);
+  font-weight: var(--sg-font-weight-annotation);
+  line-height: var(--sg-leading-marginalia);
+  color: var(--sg-color-annotation-ink);
+  background: var(--sg-color-surface);
+  border: 1px solid var(--sg-color-rule-light);
+  border-radius: var(--sg-radius-md);
+  padding: var(--sg-space-sm) var(--sg-space-md);
+  margin: var(--sg-space-md) 0;
+  box-shadow: var(--sg-shadow-xs);
+  position: relative;
+}
+
+.sg-travellers-note::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: var(--sg-space-sm);
+  width: 24px;
+  height: 12px;
+  background: var(--sg-color-highlight);
+  opacity: 0.6;
+  border-radius: 1px;
+}
+
+.sg-travellers-note__heading {
+  display: block;
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  font-weight: var(--sg-font-weight-mono-bold);
+  color: var(--sg-color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--sg-space-xs);
+}
+
+/* ── Spread Divider §7.7 ── */
+.sg-spread-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sg-space-sm);
+  width: 25%;
+  min-width: 10rem;
+  margin: var(--sg-space-section-gap) auto;
+  color: var(--sg-color-ink-muted);
+}
+
+.sg-spread-divider::before,
+.sg-spread-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--sg-color-rule);
+}
+
+.sg-spread-divider__mark {
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  color: var(--sg-color-ink-muted);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ── Dog-ear (folded page corner) ── */
+.sg-dog-ear {
+  position: relative;
+}
+
+.sg-dog-ear::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 24px 24px 0;
+  border-color: transparent var(--sg-color-paper-dark) transparent transparent;
+  box-shadow: -1px 1px 4px rgba(44, 36, 22, 0.15);
+  border-radius: 0 0 0 var(--sg-radius-sm);
+}
+
+.sg-dog-ear--left::after {
+  right: auto;
+  left: 0;
+  border-width: 24px 24px 0 0;
+  border-color: var(--sg-color-paper-dark) transparent transparent transparent;
+  box-shadow: 1px 1px 4px rgba(44, 36, 22, 0.15);
+  border-radius: 0 0 var(--sg-radius-sm) 0;
+}
+
+/* ── Page-number flourish ── */
+.sg-page-number--flourished .sg-page__number-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.sg-page-number--flourished .sg-page__number-text::before,
+.sg-page-number--flourished .sg-page__number-text::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1px;
+  background: var(--sg-color-rule);
+}
+
+/* ── Key / Legend box ── */
+.sg-key-legend {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  color: var(--sg-color-ink);
+  background: var(--sg-color-paper-dark);
+  border: 1px solid var(--sg-color-rule-light);
+  border-radius: var(--sg-radius-md);
+  padding: var(--sg-space-sm) var(--sg-space-md);
+  margin: var(--sg-space-md) 0;
+}
+
+.sg-key-legend__heading {
+  display: block;
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  font-weight: var(--sg-font-weight-mono-bold);
+  color: var(--sg-color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--sg-space-sm);
+  padding-bottom: var(--sg-space-xs);
+  border-bottom: 1px solid var(--sg-color-rule-light);
+}
+
+.sg-key-legend__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: var(--sg-space-xs) var(--sg-space-md);
+}
+
+.sg-key-legend__entry {
+  display: flex;
+  gap: var(--sg-space-xs);
+  align-items: baseline;
+  padding: var(--sg-space-xs) 0;
+  border-bottom: 1px solid var(--sg-color-rule-light);
+}
+
+.sg-key-legend__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--sg-color-ink-muted);
+}
+
+.sg-key-legend__icon-img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.sg-key-legend__label {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  color: var(--sg-color-ink);
+  line-height: var(--sg-leading-compact);
+}
+
+/* ── Section divider ── */
+.sg-section-divider {
+  text-align: center;
+  margin: var(--sg-space-section-gap) auto;
+  max-width: var(--sg-page-width);
+}
+
+.sg-section-divider__mark {
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  color: var(--sg-color-ink-muted);
+}
+
+/* ── Schedule day §6.1: Schedule Day ── */
+
+/* Schedule overview (section landing day links) */
+.sg-schedule-overview {
+  margin-top: var(--sg-space-md);
+}
+
+.sg-schedule-overview p {
+  margin: var(--sg-space-xs) 0;
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  line-height: var(--sg-leading-compact);
+}
+
+.sg-schedule-overview a {
+  font-weight: var(--sg-font-weight-heading);
+  color: var(--sg-color-ink);
+  text-decoration: none;
+}
+
+.sg-schedule-overview a:hover {
+  color: var(--sg-color-link);
+}
+
+/* Section label above the schedule day heading */
+.sg-schedule-day__section-label {
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  color: var(--sg-color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Day overview text (precedes the timeline) */
+.sg-schedule-day__overview {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body);
+  font-weight: var(--sg-font-weight-body);
+  line-height: var(--sg-leading-body);
+  color: var(--sg-color-ink);
+  margin-bottom: var(--sg-space-md);
+}
+
+/* Day-arc illustration slot */
+.sg-schedule-day__arc {
+  width: 100%;
+  height: 4px;
+  margin: var(--sg-space-md) 0;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--sg-color-rule-light),
+    var(--sg-color-stamp) 30%,
+    var(--sg-color-stamp) 70%,
+    var(--sg-color-rule-light)
+  );
+  opacity: 0.6;
+}
+
+/* Schedule container */
+.sg-schedule {
+  margin: var(--sg-space-md) 0;
+}
+
+/* Timeline list — vertical spine */
+.sg-schedule__timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  padding-left: 5.5rem;
+}
+
+/* Vertical spine */
+.sg-schedule__timeline::before {
+  content: '';
+  position: absolute;
+  left: 2.6rem;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  width: 1px;
+  background: var(--sg-color-rule);
+}
+
+/* Timeline entry */
+.sg-schedule__entry {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--sg-space-sm);
+  padding: var(--sg-space-sm) 0;
+  position: relative;
+}
+
+/* Timeline dot */
+.sg-schedule__entry::before {
+  content: '';
+  position: absolute;
+  left: -2.95rem;
+  top: 0.5rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sg-color-ink-muted);
+  border: 1.5px solid var(--sg-color-paper);
+  z-index: 1;
+}
+
+/* Session-type dot colours */
+.sg-schedule__entry[data-icon='talk']::before,
+.sg-schedule__entry[data-icon='workshop']::before {
+  background: var(--sg-color-stamp);
+}
+
+.sg-schedule__entry[data-icon='social']::before {
+  background: var(--sg-color-ink);
+}
+
+.sg-schedule__entry[data-icon='meal']::before,
+.sg-schedule__entry[data-icon='break']::before,
+.sg-schedule__entry[data-icon='coffee']::before {
+  background: var(--sg-color-paper);
+  border-color: var(--sg-color-rule);
+}
+
+/* Time marker */
+.sg-schedule__time {
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  font-weight: var(--sg-font-weight-mono-bold);
+  color: var(--sg-color-ink-muted);
+  white-space: nowrap;
+  padding-top: 0.1rem;
+  min-width: 3.5rem;
+}
+
+/* Session body */
+.sg-schedule__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+/* Session title */
+.sg-schedule__session-title {
+  font-family: var(--sg-font-display);
+  font-size: var(--sg-font-size-body);
+  font-weight: var(--sg-font-weight-heading);
+  color: var(--sg-color-ink);
+  line-height: var(--sg-leading-heading);
+}
+
+/* Break and meal entries are visually lighter */
+.sg-schedule__entry[data-icon='break'] .sg-schedule__session-title,
+.sg-schedule__entry[data-icon='meal'] .sg-schedule__session-title,
+.sg-schedule__entry[data-icon='coffee'] .sg-schedule__session-title {
+  font-weight: var(--sg-font-weight-body);
+  color: var(--sg-color-ink-muted);
+}
+
+/* Session description */
+.sg-schedule__session-desc {
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  color: var(--sg-color-ink-muted);
+  line-height: var(--sg-leading-compact);
+}
+
+/* Schedule day locations footer */
+.sg-schedule-day__locations {
+  margin-top: var(--sg-space-md);
+  padding-top: var(--sg-space-sm);
+  border-top: 1px solid var(--sg-color-rule-light);
+}
+
+.sg-schedule-day__locations-label {
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  font-weight: var(--sg-font-weight-mono-bold);
+  color: var(--sg-color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: var(--sg-space-xs);
+}
+
+.sg-schedule-day__locations-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sg-space-xs) var(--sg-space-md);
+}
+
+.sg-schedule-day__location-link {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--sg-font-body);
+  font-size: var(--sg-font-size-body-sm);
+  color: var(--sg-color-ink-muted);
+  text-decoration: none;
+}
+
+.sg-schedule-day__location-link:hover {
+  color: var(--sg-color-ink);
+}
+
+.sg-schedule-day__location-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--sg-color-stamp);
+  color: var(--sg-color-stamp-ink);
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+  font-weight: var(--sg-font-weight-mono-bold);
+  line-height: 1;
+}
+
+/* ── Day navigation (within-section prev/next for schedule days) ── */
+
+.sg-day-nav {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--sg-page-width);
+  margin: var(--sg-space-lg) auto;
+  padding: 0 var(--sg-page-padding-inline);
+}
+
+.sg-day-nav__prev,
+.sg-day-nav__next {
+  text-decoration: none;
+  color: var(--sg-color-ink-muted);
+  font-size: var(--sg-font-size-body-sm);
+}
+
+.sg-day-nav__prev:hover,
+.sg-day-nav__next:hover {
+  color: var(--sg-color-ink);
+}
+
+.sg-day-nav__label {
+  display: block;
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-caption);
+}
+
+.sg-day-nav__title {
+  display: block;
+}
+
+/* ── Screen-reader-only utility ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Focus states ── */
+
+/* Shared focus-visible ring — on-brand, visible, uses stamp-red as the indicator */
+.sg-guide :focus-visible {
+  outline: 2px solid var(--sg-color-stamp);
+  outline-offset: 2px;
+}
+
+/* Skip link already has :focus, add focus-visible */
+.sg-skip-link:focus-visible {
+  outline: 2px solid var(--sg-color-stamp);
+  outline-offset: 1px;
+}
+
+/* TOC trigger — button already gets the shared ring */
+.sg-toc-trigger:focus-visible {
+  outline-color: var(--sg-color-stamp);
+}
+
+/* TOC drawer close button */
+.sg-toc-drawer__close {
+  position: absolute;
+  top: var(--sg-space-xs);
+  right: var(--sg-space-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: none;
+  color: var(--sg-color-ink-muted);
+  font-family: var(--sg-font-mono);
+  font-size: var(--sg-font-size-body);
+  cursor: pointer;
+  border-radius: var(--sg-radius-sm);
+}
+
+.sg-toc-drawer__close:hover {
+  color: var(--sg-color-ink);
+  background: var(--sg-color-paper-dark);
+}
+
+/* TOC tab focus */
+.sg-toc-drawer__tab:focus-visible {
+  outline: 2px solid var(--sg-color-stamp);
+  outline-offset: -2px;
+}
+
+/* Breadcrumb link focus */
+.sg-breadcrumb__link:focus-visible {
+  outline: 2px solid var(--sg-color-stamp);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* Section nav and day nav links */
+.sg-section-nav__prev:focus-visible,
+.sg-section-nav__next:focus-visible,
+.sg-day-nav__prev:focus-visible,
+.sg-day-nav__next:focus-visible {
+  outline: 2px solid var(--sg-color-stamp);
+  outline-offset: 2px;
+  border-radius: var(--sg-radius-sm);
+}
+
+/* Location links in schedule footer */
+.sg-schedule-day__location-link:focus-visible {
+  outline: 2px solid var(--sg-color-stamp);
+  outline-offset: 2px;
+  border-radius: var(--sg-radius-sm);
+}
+
+/* TOC list links */
+.sg-toc-list__link:focus-visible {
+  outline: 2px solid var(--sg-color-stamp);
+  outline-offset: -2px;
+  border-radius: var(--sg-radius-sm);
+}
+
+/* Support footer links (if any are added) */
+.sg-support a:focus-visible {
+  outline: 2px solid var(--sg-color-stamp);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── Responsive: single-column callout list on narrow pages ── */
+@media (max-width: 48rem) {
+  .sg-map__callouts {
+    grid-template-columns: 1fr;
+  }
+
+  .sg-map__icon-list {
+    grid-template-columns: 1fr;
+  }
+
+  .sg-key-legend__list {
+    grid-template-columns: 1fr;
+  }
+
+  .sg-schedule__timeline {
+    padding-left: 3.5rem;
+  }
+
+  .sg-schedule__timeline::before {
+    left: 1.1rem;
+  }
+
+  .sg-schedule__entry::before {
+    left: -2.4rem;
+  }
+
+  .sg-schedule__entry {
+    grid-template-columns: 3rem 1fr;
+  }
+
+  .sg-schedule__time {
+    min-width: unset;
+  }
+}

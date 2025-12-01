@@ -1,0 +1,10 @@
+{{/* Marginalia shortcode — for use in Markdown content. Inserts a single margin
+note inline (vs. the front-matter list). Usage: {{< marginalia text="A
+handwritten note in the margin." position="right-margin" >}} */}} {{ $text :=
+.Get "text" }} {{ $position := .Get "position" | default "right-margin" }}
+<aside class="sg-marginalia" aria-label="Margin note">
+  <p class="sg-marginalia__note sg-marginalia__note--{{ $position }}">
+    <span class="sg-marginalia__cue" aria-hidden="true"></span>
+    <span class="sg-marginalia__text">{{ $text }}</span>
+  </p>
+</aside>

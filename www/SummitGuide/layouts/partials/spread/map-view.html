@@ -1,0 +1,106 @@
+{{/* Map view — full-spread illustrated map with numbered callouts and legend.
+Type: map, Spread: map-view Consumes map-canvas partial for the inline SVG,
+renders callout directory and icon legend from page front-matter and data files.
+*/}} {{ $pageNumber := .Params.page_number | default 0 | int }}
+<div
+  class="sg-spread sg-spread--two-page sg-spread--map-view"
+  aria-label="{{ .Title }}"
+  data-spread-number="{{ .Params.spread_number }}"
+>
+  {{/* Map page */}}
+  <article
+    class="sg-page sg-page--left sg-page--map"
+    aria-labelledby="sg-page-{{ $pageNumber }}-title"
+    data-page-number="{{ $pageNumber }}"
+  >
+    <div class="sg-page__content">
+      <h2 id="sg-page-{{ $pageNumber }}-title" class="sg-spread-header__title">
+        {{ .Title }}
+      </h2>
+      {{ with .Params.summary }}
+      <p class="sg-spread-header__summary">{{ . }}</p>
+      {{ end }}
+
+      <div
+        class="sg-map"
+        role="figure"
+        aria-label="Illustrated map of {{ .Title }}"
+      >
+        {{ partial "map-canvas" (dict "page" .) }} {{ with .Params.callouts }}
+        <ol class="sg-map__callouts">
+          {{ range . }}
+          <li class="sg-map__callout" data-callout-number="{{ .number }}">
+            <span class="sg-map__callout-marker" aria-hidden="true"
+              >{{ .number }}</span
+            >
+            <span class="sg-map__callout-name"
+              ><span class="sr-only">{{ .number }}. </span>{{ .name }}</span
+            >
+            <span class="sg-map__callout-desc">{{ .description }}</span>
+          </li>
+          {{ end }}
+        </ol>
+        {{ end }} {{ with .Params.key_places }}
+        <div class="sg-map__key" aria-label="Map key">
+          <ul class="sg-map__key-list">
+            {{ range . }} {{ $slug := . }} {{ range where
+            hugo.Data.index_spaces.spaces "slug" $slug }}
+            <li class="sg-map__key-entry">
+              {{ with .callout_number }}
+              <span class="sg-map__key-marker" aria-hidden="true">{{ . }}</span>
+              {{ end }}
+              <span class="sg-map__key-name"
+                >{{ with .callout_number }}<span class="sr-only">{{ . }}. </span
+                >{{ end }}{{ .name }}</span
+              >
+            </li>
+            {{ end }} {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+      </div>
+
+      {{ .Content }}
+    </div>
+
+    {{ partial "page-number" $pageNumber }}
+  </article>
+
+  {{/* Legend / detail page */}}
+  <article
+    class="sg-page sg-page--right sg-page--map-legend"
+    aria-labelledby="sg-page-{{ add $pageNumber 1 }}-title"
+    data-page-number="{{ add $pageNumber 1 }}"
+  >
+    <div class="sg-page__content">
+      <h3
+        id="sg-page-{{ add $pageNumber 1 }}-title"
+        class="sg-spread-header__title"
+      >
+        Map Legend
+      </h3>
+
+      {{ with .Params.icon_refs }}
+      <div class="sg-map__icons" aria-label="Icon key">
+        <ul class="sg-map__icon-list">
+          {{ range . }} {{ $token := . }} {{ $found := false }} {{ range
+          hugo.Data.index_icons.categories }} {{ range .icons }} {{ if and (not
+          $found) (eq .token $token) }}
+          <li class="sg-map__icon-entry">
+            <span class="sg-map__icon-slot" aria-hidden="true">
+              {{ partial "illustration" (dict "name" (printf "icons/%s" .token)
+              "class" "sg-map__icon-img" "width" "24" "height" "24") }}
+            </span>
+            <span class="sg-map__icon-meaning">{{ .meaning }}</span>
+          </li>
+          {{ $found = true }} {{ end }} {{ end }} {{ end }} {{ end }}
+        </ul>
+      </div>
+      {{ end }}
+    </div>
+
+    {{ partial "page-number" (add $pageNumber 1) }}
+  </article>
+
+  <div class="sg-spread__gutter" aria-hidden="true"></div>
+</div>

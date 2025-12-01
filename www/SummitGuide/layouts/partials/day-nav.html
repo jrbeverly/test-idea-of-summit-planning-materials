@@ -1,0 +1,17 @@
+{{/* Day navigation — previous/next page within the same section. Uses Hugo's
+built-in .PrevInSection / .NextInSection (ordered by weight). */}} {{ $prev :=
+.PrevInSection }} {{ $next := .NextInSection }} {{ if or $prev $next }}
+<nav class="sg-day-nav" aria-label="Day navigation">
+  {{ with $prev }}
+  <a class="sg-day-nav__prev" href="{{ .RelPermalink }}">
+    <span class="sg-day-nav__label">&larr; Previous day</span>
+    <span class="sg-day-nav__title">{{ .Title }}</span>
+  </a>
+  {{ end }} {{ with $next }}
+  <a class="sg-day-nav__next" href="{{ .RelPermalink }}">
+    <span class="sg-day-nav__label">Next day &rarr;</span>
+    <span class="sg-day-nav__title">{{ .Title }}</span>
+  </a>
+  {{ end }}
+</nav>
+{{ end }}

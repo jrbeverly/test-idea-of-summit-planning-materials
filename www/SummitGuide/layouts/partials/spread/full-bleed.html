@@ -1,0 +1,51 @@
+{{/* Full-bleed spread — content fills both pages without column structure. Used
+for narrative moments, large illustrations, atmospheric spreads. Type: spread,
+Spread: two-page-spread, Layout: full-bleed */}} {{ $pageNumber :=
+.Params.page_number | default 0 | int }}
+<div
+  class="sg-spread sg-spread--two-page sg-spread--full-bleed"
+  aria-label="{{ .Title }}"
+  data-spread-number="{{ .Params.spread_number }}"
+>
+  <article
+    class="sg-page sg-page--left sg-page--full-bleed"
+    aria-labelledby="sg-page-{{ $pageNumber }}-title"
+    data-page-number="{{ $pageNumber }}"
+  >
+    <div class="sg-page__content sg-page__content--full-bleed">
+      <h2 id="sg-page-{{ $pageNumber }}-title" class="sg-spread-header__title">
+        {{ .Title }}
+      </h2>
+      {{ with .Params.summary }}
+      <p class="sg-spread-header__summary">{{ . }}</p>
+      {{ end }}
+
+      <div class="sg-page__body">{{ .Content }}</div>
+    </div>
+
+    {{ partial "marginalia" . }} {{ partial "page-number" $pageNumber }}
+  </article>
+
+  <article
+    class="sg-page sg-page--right sg-page--full-bleed"
+    aria-label="Page {{ add $pageNumber 1 }}"
+    data-page-number="{{ add $pageNumber 1 }}"
+  >
+    <div class="sg-page__content sg-page__content--full-bleed">
+      {{ with .Params.illustrations }}
+      <div
+        class="sg-spread__illustration"
+        role="img"
+        aria-label="Spread illustration"
+      >
+        {{ range . }} {{ partial "illustration" (dict "name" . "class"
+        "sg-spread__illustration-svg") }} {{ end }}
+      </div>
+      {{ end }}
+    </div>
+
+    {{ partial "page-number" (add $pageNumber 1) }}
+  </article>
+
+  <div class="sg-spread__gutter" aria-hidden="true"></div>
+</div>

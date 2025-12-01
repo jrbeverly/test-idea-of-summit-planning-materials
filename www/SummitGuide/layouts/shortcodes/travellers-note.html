@@ -1,0 +1,4 @@
+{{/* Traveller's Note shortcode — for use in Markdown content. Usage: {{<
+travellers-note heading="LOCAL TIP" text="The almond croissant is the move." >}}
+*/}} {{ partial "travellers-note" (dict "heading" (.Get "heading") "text" (.Get
+"text")) }}

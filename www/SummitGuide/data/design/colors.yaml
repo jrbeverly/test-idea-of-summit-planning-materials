@@ -1,0 +1,24 @@
+# Color tokens
+# Mirrors CSS custom properties from the visual system specification.
+# Semantic role names only — no color-name tokens.
+# Consumed by Hugo token-to-CSS pipeline and inline SVG color references.
+
+paper: '#faf7f2'
+paper-dark: '#f0ebe0'
+ink: '#2c2416'
+ink-muted: '#6b5e4a'
+highlight: '#f3d94e'
+highlight-text: '#2c2416'
+stamp: '#c73e3a'
+stamp-ink: '#faf7f2'
+rule: '#d4c9b5'
+rule-light: '#e5ddd0'
+surface: '#ffffff'
+surface-ink: '#2c2416'
+annotation-ink: '#4a6b8a'
+link: '#8b4513'
+link-visited: '#6b5e4a'
+map-line: '#5c4e3d'
+map-fill: '#e8e0d5'
+illustration-line: '#3d3226'
+illustration-fill: '#f0ebe0'

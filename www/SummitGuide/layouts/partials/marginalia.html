@@ -1,0 +1,15 @@
+{{/*
+  Marginalia — margin notes and tips.
+  Each entry has text and position (left-margin, right-margin, callout-box).
+  Data: .Params.marginalia
+*/}}
+{{ with .Params.marginalia }}
+<aside class="sg-marginalia" aria-label="Margin notes">
+  {{ range . }}
+    <p class="sg-marginalia__note sg-marginalia__note--{{ .position | default "right-margin" }}">
+      <span class="sg-marginalia__cue" aria-hidden="true"></span>
+      <span class="sg-marginalia__text">{{ .text }}</span>
+    </p>
+  {{ end }}
+</aside>
+{{ end }}

@@ -1,0 +1,51 @@
+{{/*
+  Responsive raster image via Hugo image processing.
+
+  Parameters (dict):
+    path   — path relative to assets/images/, e.g. "neighbourhood-photo.jpg"
+    alt    — alt text (required)
+    width  — resize width in px (default 800)
+    class  — optional CSS class(es)
+    sizes  — optional sizes attribute
+
+  Output: <img> with srcset (1x + 2x WebP), width, height, loading="lazy".
+  Hugo publishes the processed images to public/ and fingerprints them.
+
+  Usage:
+    {{ partial "responsive-image" (dict "path" "office-entrance.jpg" "alt" "Office entrance" "width" 600) }}
+
+  Note: Accepts JPEG, PNG, TIFF, BMP, and GIF sources. Output is WebP.
+*/}}
+
+{{ $path := .path }}
+{{ $alt := .alt }}
+{{ $width := .width | default 800 | int }}
+{{ $class := .class | default "" }}
+{{ $sizes := .sizes | default "100vw" }}
+
+{{ if not $alt }}
+  {{ errorf "responsive-image partial requires alt text for %s" $path }}
+{{ end }}
+
+{{ $img := resources.Get (printf "images/%s" $path) }}
+
+{{ if $img }}
+  {{ $ext := path.Ext $path | strings.TrimLeft "." }}
+  {{ if in (slice "jpg" "jpeg" "png" "tiff" "bmp" "gif") $ext }}
+    {{ $resized_1x := $img.Resize (printf "%dx webp" $width) }}
+    {{ $resized_2x := $img.Resize (printf "%dx webp" (mul $width 2)) }}
+    <img
+      src="{{ $resized_1x.RelPermalink }}"
+      srcset="{{ $resized_1x.RelPermalink }} 1x, {{ $resized_2x.RelPermalink }} 2x"
+      width="{{ $resized_1x.Width }}"
+      height="{{ $resized_1x.Height }}"
+      alt="{{ $alt }}"
+      {{ with $class }}class="{{ . }}"{{ end }}
+      {{ with $sizes }}sizes="{{ . }}"{{ end }}
+      loading="lazy">
+  {{ else }}
+    {{ warnf "responsive-image: unsupported format .%s for %s" $ext $path }}
+  {{ end }}
+{{ else }}
+  {{ warnf "responsive-image: asset not found: assets/images/%s" $path }}
+{{ end }}

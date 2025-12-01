@@ -1,0 +1,38 @@
+{{/* Home / Guide cover page. Content/_index.md has type: section-landing,
+journey_step: 0. This template catches the home page before type-based lookup.
+*/}} {{ define "main" }}
+<article
+  class="sg-page sg-page--single sg-page--guide-cover"
+  aria-labelledby="sg-guide-cover-title"
+  data-spread-number="0"
+>
+  <div class="sg-page__content">
+    <header class="sg-guide-cover__header">
+      <h1 id="sg-guide-cover-title" class="sg-guide-cover__title">
+        {{ .Title }}
+      </h1>
+      {{ with .Params.summary }}
+      <p class="sg-guide-cover__summary">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    <div class="sg-guide-cover__body">{{ .Content }}</div>
+
+    {{ with .Params.illustrations }}
+    <div
+      class="sg-guide-cover__illustration"
+      role="img"
+      aria-label="Guide illustration"
+    >
+      {{ range . }} {{ partial "illustration" (dict "name" . "class"
+      "sg-guide-cover__illustration-svg") }} {{ end }}
+    </div>
+    {{ end }}
+  </div>
+
+  <footer class="sg-page__number">
+    <span class="sg-page__number-text">{{ .Params.page_number }}</span>
+  </footer>
+</article>
+
+{{ partial "section-nav" . }} {{ end }}

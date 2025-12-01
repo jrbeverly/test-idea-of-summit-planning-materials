@@ -1,0 +1,33 @@
+{{/* Journey breadcrumb — persistent progress bar showing all 9 sections.
+Satisfies the "sequenced" quality from the visual system spec. Data:
+data/toc.yaml */}} {{ $currentStep := .Params.journey_step | default 0 | int }}
+<nav class="sg-breadcrumb" aria-label="Journey progress">
+  <ol class="sg-breadcrumb__segments">
+    {{ range hugo.Data.toc.sections }} {{ $status := "future" }} {{ if lt
+    .number $currentStep }}{{ $status = "visited" }}{{ end }} {{ if eq .number
+    $currentStep }}{{ $status = "current" }}{{ end }}
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--{{ $status }}">
+      <a
+        class="sg-breadcrumb__link"
+        href="{{ $.Site.Home.RelPermalink }}{{ .slug }}/"
+        aria-label="Section {{ .number }}: {{ .title }}"
+        {{
+        if
+        eq
+        .number
+        $currentStep
+        }}aria-current="step"
+        {{
+        end
+        }}
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+    {{ end }}
+  </ol>
+  <span class="sg-breadcrumb__label">
+    {{ if gt $currentStep 0 }} Section {{ $currentStep }} of 9 {{ else }} Summit
+    Guide {{ end }}
+  </span>
+</nav>

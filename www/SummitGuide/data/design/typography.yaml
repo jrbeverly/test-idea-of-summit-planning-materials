@@ -1,0 +1,42 @@
+# Typography tokens
+# Mirrors CSS custom properties from the visual system specification.
+# Source of truth for font families, type scale, line heights, and weights.
+# Consumed by Hugo token-to-CSS pipeline.
+
+fonts:
+  display: 'Newsreader'
+  body: 'Newsreader'
+  annotation: 'Caveat'
+  mono: 'Space Mono'
+
+scale:
+  display-xl: '4.209rem'
+  display-lg: '3.367rem'
+  display-md: '2.694rem'
+  heading: '2.155rem'
+  heading-sm: '1.724rem'
+  body: '1rem'
+  body-sm: '0.8rem'
+  callout: '1.25rem'
+  marginalia: '0.75rem'
+  page-number: '0.75rem'
+  stamp: '0.875rem'
+  caption: '0.7rem'
+  index: '0.8rem'
+
+leading:
+  display: 1.1
+  heading: 1.2
+  body: 1.6
+  compact: 1.35
+  marginalia: 1.4
+
+weights:
+  body: 400
+  body-italic: '400 italic'
+  heading: 500
+  display: 400
+  strong: 600
+  annotation: 400
+  mono: 400
+  mono-bold: 700

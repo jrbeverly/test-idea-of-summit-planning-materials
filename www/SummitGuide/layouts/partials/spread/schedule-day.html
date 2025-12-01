@@ -1,0 +1,86 @@
+{{/* Schedule day — vertical timeline for a single summit day. Type:
+schedule-day, Spread: schedule-day No HTML
+<table>
+  elements — timeline is a visual sequence. Consumes .Params.sessions list
+  (time, title, description, icon). */}} {{ $pageNumber := .Params.page_number |
+  default 0 | int }}
+  <article
+    class="sg-page sg-page--single sg-page--schedule-day"
+    aria-labelledby="sg-page-{{ $pageNumber }}-title"
+    data-spread-number="{{ .Params.spread_number }}"
+  >
+    <div class="sg-page__content">
+      <header class="sg-spread-header">
+        <span class="sg-schedule-day__section-label" aria-hidden="true">
+          Section {{ .Params.journey_step }}
+        </span>
+        <h2
+          id="sg-page-{{ $pageNumber }}-title"
+          class="sg-spread-header__title"
+        >
+          {{ .Title }}
+        </h2>
+        {{ with .Params.summary }}
+        <p class="sg-spread-header__summary">{{ . }}</p>
+        {{ end }}
+      </header>
+
+      {{ with .Content }}
+      <div class="sg-schedule-day__overview">{{ . }}</div>
+      {{ end }}
+
+      <div class="sg-schedule-day__arc" aria-hidden="true"></div>
+
+      <div
+        class="sg-schedule"
+        role="list"
+        aria-label="Schedule timeline for {{ .Title }}"
+      >
+        <ol class="sg-schedule__timeline">
+          {{ range .Params.sessions }}
+          <li class="sg-schedule__entry" data-icon="{{ .icon }}">
+            <time class="sg-schedule__time">{{ .time }}</time>
+            <div class="sg-schedule__body">
+              <span class="sg-schedule__session-title">{{ .title }}</span>
+              {{ with .description }}
+              <span class="sg-schedule__session-desc">{{ . }}</span>
+              {{ end }}
+            </div>
+          </li>
+          {{ end }}
+        </ol>
+      </div>
+
+      {{ with .Params.key_places }}
+      <footer class="sg-schedule-day__locations" aria-label="Session locations">
+        <span class="sg-schedule-day__locations-label"
+          >Where things happen:</span
+        >
+        <ul class="sg-schedule-day__locations-list">
+          {{ range . }} {{ $slug := . }} {{ range where
+          hugo.Data.index_spaces.spaces "slug" $slug }}
+          <li>
+            <a
+              class="sg-schedule-day__location-link"
+              href="{{ $.Site.Home.RelPermalink }}finding-your-way/key-locations/"
+            >
+              {{ with .callout_number }}
+              <span class="sg-schedule-day__location-marker" aria-hidden="true"
+                >{{ . }}</span
+              >
+              {{ end }}
+              <span
+                >{{ with .callout_number }}<span class="sr-only">{{ . }}. </span
+                >{{ end }}{{ .name }}</span
+              >
+            </a>
+          </li>
+          {{ end }} {{ end }}
+        </ul>
+      </footer>
+      {{ end }}
+    </div>
+
+    {{ partial "page-number" $pageNumber }}
+  </article>
+</table>

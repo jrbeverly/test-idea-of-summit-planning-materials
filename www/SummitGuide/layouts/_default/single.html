@@ -1,0 +1,13 @@
+{{/* Default single page — fallback for pages without a specific type layout.
+Renders as a two-page spread when params indicate, otherwise a simple page. */}}
+{{ define "main" }} {{ $spread := .Params.spread | default "single-page" }} {{
+$type := .Params.type | default "spread" }} {{ if eq $type "section-landing" }}
+{{ partial "spread/section-landing" . }} {{ else if eq $type "schedule-day" }}
+{{ partial "spread/schedule-day" . }} {{ else if eq $type "map" }} {{ partial
+"spread/map-view" . }} {{ else if eq $type "directory" }} {{ partial
+"spread/directory" . }} {{ else if eq $spread "two-page-spread" }} {{ $layout :=
+.Params.layout | default "" }} {{ if eq $layout "full-bleed" }} {{ partial
+"spread/full-bleed" . }} {{ else if eq $layout "two-column" }} {{ partial
+"spread/two-column" . }} {{ else }} {{ partial "spread/two-page" . }} {{ end }}
+{{ else }} {{ partial "spread/two-page" . }} {{ end }} {{ partial "section-nav"
+. }} {{ end }}

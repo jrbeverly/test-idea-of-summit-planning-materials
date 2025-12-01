@@ -1,0 +1,11 @@
+baseURL = "/"
+relativeURLs = true
+locale = "en-US"
+title = "Summit Guide"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[params]
+  description = "A printed-feeling digital guide for an in-person summit — magazine, booklet, reference."

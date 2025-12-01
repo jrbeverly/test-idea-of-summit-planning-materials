@@ -1,0 +1,12 @@
+{{/* Key / Legend shortcode — for use in Markdown content. Although key-legend
+entries are best authored in data files, this shortcode lets content authors
+render a legend box inline. Named parameter usage: {{< key-legend heading="Map
+Key" >}} */}} {{ $heading := .Get "heading" | default "" }} {{ $icons := .Get
+"icons" | default "" }} {{ $entries := slice }} {{/* If an icons list is passed,
+look up each token in data/index_icons.yaml */}} {{ if $icons }} {{ $iconTokens
+:= split $icons "," }} {{ range $iconTokens }} {{ $token := trim . " " }} {{
+$found := false }} {{ range hugo.Data.index_icons.categories }} {{ range .icons
+}} {{ if and (not $found) (eq .token $token) }} {{ $entries = $entries | append
+(dict "icon" (printf "icons/%s" .token) "label" .meaning) }} {{ $found = true }}
+{{ end }} {{ end }} {{ end }} {{ end }} {{ end }} {{ partial "key-legend" (dict
+"heading" $heading "entries" $entries) }}

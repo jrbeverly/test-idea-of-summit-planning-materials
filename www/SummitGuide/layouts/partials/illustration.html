@@ -1,0 +1,43 @@
+{{/*
+  Inline an SVG illustration from assets/illustrations/.
+
+  Parameters (dict):
+    name  — path relative to assets/illustrations/, e.g. "spot/suitcase"
+    class — optional CSS class(es)
+    width — optional width attribute (px)
+    height — optional height attribute (px)
+    ariaHidden — set to false when the illustration carries meaning that
+  needs to be conveyed to screen readers. Default true.
+
+  Usage:
+    {{ partial "illustration" (dict "name" "spot/suitcase" "class" "illustration--sm") }}
+    {{ partial "illustration" (dict "name" "maps/floor-plan" "ariaHidden" false) }}
+
+  By default illustrations are marked aria-hidden="true" (decorative).
+  When a wrapper provides an accessible name via role="img" + aria-label,
+  the SVG remains hidden and the wrapper carries the name.
+  When ariaHidden=false, the SVG is exposed to assistive technology and
+  should contain an embedded <title> for its accessible name.
+*/}}
+
+{{ $name := .name }}
+{{ $class := .class | default "" }}
+{{ $width := .width | default "" }}
+{{ $height := .height | default "" }}
+{{ $ariaHidden := .ariaHidden | default true }}
+
+{{ $path := printf "illustrations/%s.svg" $name }}
+{{ $svg := resources.Get $path }}
+
+{{ if $svg }}
+  {{ $clean := $svg.Content | safeHTML }}
+  {{ if or $class $width $height }}
+    {{ $clean = replaceRE "<svg" (printf "<svg class=\"%s\"%s%s" $class (cond (ne $width "") (printf " width=\"%s\"" $width) "") (cond (ne $height "") (printf " height=\"%s\"" $height) "")) $clean 1 }}
+  {{ end }}
+  {{ if $ariaHidden }}
+    {{ $clean = replaceRE "<svg" "<svg aria-hidden=\"true\"" $clean 1 }}
+  {{ end }}
+  {{ $clean | safeHTML }}
+{{ else }}
+  {{ warnf "illustration not found: assets/%s" $path }}
+{{ end }}

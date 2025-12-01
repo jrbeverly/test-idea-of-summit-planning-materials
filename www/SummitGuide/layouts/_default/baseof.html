@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" class="sg-guide">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ .Site.Params.description }}" />
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="{{ "fonts/newsreader-latin.woff2" | relURL }}"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="{{ "fonts/space-mono-latin-400.woff2" | relURL }}"
+    />
+    {{ $tokensTpl := resources.Get "css/tokens.css" }} {{ $tokens := $tokensTpl
+    | resources.ExecuteAsTemplate "css/tokens.generated.css" . | minify |
+    fingerprint }} {{ $fonts := resources.Get "css/fonts.css" | minify |
+    fingerprint }} {{ $styles := resources.Get "css/site.css" | minify |
+    fingerprint }}
+    <link rel="stylesheet" href="{{ $tokens.RelPermalink }}" />
+    <link rel="stylesheet" href="{{ $fonts.RelPermalink }}" />
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
+    {{ $drawerJS := resources.Get "js/toc-drawer.js" | minify | fingerprint }}
+    <script src="{{ $drawerJS.RelPermalink }}" defer></script>
+  </head>
+  <body class="sg-body">
+    <a class="sg-skip-link" href="#sg-main">Skip to main content</a>
+
+    {{ partial "breadcrumb" . }}
+
+    <button
+      class="sg-toc-trigger"
+      type="button"
+      aria-label="Table of Contents"
+      aria-expanded="false"
+      aria-controls="sg-toc-drawer"
+    >
+      <span class="sg-toc-trigger__icon" aria-hidden="true">&#9776;</span>
+      <span class="sg-toc-trigger__label">Contents</span>
+    </button>
+
+    <div
+      id="sg-toc-drawer"
+      class="sg-toc-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Table of Contents and Key"
+      hidden
+    >
+      <div class="sg-toc-drawer__panel">
+        <button
+          class="sg-toc-drawer__close"
+          aria-label="Close table of contents"
+          type="button"
+        >
+          &times;
+        </button>
+        <div
+          class="sg-toc-drawer__tabs"
+          role="tablist"
+          aria-label="Reference panels"
+        >
+          <button
+            class="sg-toc-drawer__tab"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="sg-toc-panel-contents"
+          >
+            Contents
+          </button>
+          <button
+            class="sg-toc-drawer__tab"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="sg-toc-panel-key"
+          >
+            Key
+          </button>
+        </div>
+        <div
+          id="sg-toc-panel-contents"
+          class="sg-toc-drawer__panel-content"
+          role="tabpanel"
+        >
+          <ol class="sg-toc-list">
+            {{ range hugo.Data.toc.sections }}
+            <li
+              class="sg-toc-list__item {{ if eq .number $.Params.journey_step }}sg-toc-list__item--current{{ end }}"
+            >
+              <a
+                class="sg-toc-list__link"
+                href="{{ $.Site.Home.RelPermalink }}{{ .slug }}/"
+              >
+                <span class="sg-toc-list__number">{{ .number }}</span>
+                <span class="sg-toc-list__title">{{ .title }}</span>
+              </a>
+            </li>
+            {{ end }}
+          </ol>
+        </div>
+        <div
+          id="sg-toc-panel-key"
+          class="sg-toc-drawer__panel-content"
+          role="tabpanel"
+          hidden
+        >
+          <!-- Index/Key cross-reference rendered in Milestone 3 -->
+        </div>
+      </div>
+    </div>
+
+    <main id="sg-main">{{ block "main" . }}{{ end }}</main>
+
+    {{ partial "support-footer" . }}
+  </body>
+</html>

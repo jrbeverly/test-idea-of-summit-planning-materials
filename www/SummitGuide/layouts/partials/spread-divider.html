@@ -1,0 +1,14 @@
+{{/* Spread Divider — a section transition marker between spreads or sections.
+Visual system spec §7.7: centered rule at 25% page width, small section number.
+Parameters (dict): label — text shown at the center of the divider, e.g. "§4"
+(optional) If omitted, renders a plain rule without a label. Usage from
+template: {{ partial "spread-divider" (dict "label" "§4") }} {{ partial
+"spread-divider" (dict) }} {{/* plain rule */}} */}} {{ $label := .label |
+default "" }}
+<div
+  class="sg-spread-divider"
+  role="separator"
+  aria-label="{{ with $label }}Section transition: {{ . }}{{ end }}"
+>
+  <span class="sg-spread-divider__mark">{{ $label }}</span>
+</div>

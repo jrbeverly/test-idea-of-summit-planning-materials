@@ -1,0 +1,16 @@
+{{/*
+  Stamp — a rubber-stamp visual marker for special-status content.
+  Visual system spec §1.5, §6.1: rotated, uppercase mono on stamp-red background.
+
+  Parameters (dict):
+    text   — stamp text (required), e.g. "IMPORTANT", "DON'T MISS", "LOCAL TIP"
+    shape  — "rectangle" (default) or "circle"
+
+  Usage from template:
+    {{ partial "stamp" (dict "text" "IMPORTANT" "shape" "circle") }}
+*/}}
+{{ $text := .text }}
+{{ $shape := .shape | default "rectangle" }}
+<span class="sg-stamp{{ if eq $shape "circle" }} sg-stamp--circle{{ end }}" aria-label="{{ $text }}">
+  {{ $text }}
+</span>

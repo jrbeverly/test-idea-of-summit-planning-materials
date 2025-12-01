@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en" class="sg-guide">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A printed-feeling digital guide for an in-person summit — magazine, booklet, reference." />
+    <title>Component Demo | Summit Guide</title>
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="../fonts/newsreader-latin.woff2"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="../fonts/space-mono-latin-400.woff2"
+    />
+       
+    <link rel="stylesheet" href="../css/tokens.generated.min.0361d16db2e40c1fee5d811907be0edae292b6f3e2d44716e1d521c38b578c82.css" />
+    <link rel="stylesheet" href="../css/fonts.min.bddbd5a78877033809cc659187e700ce19cc67827e5fed5771adc28ccf441dc2.css" />
+    <link rel="stylesheet" href="../css/site.min.4548b36604d6dacb37ca0746a75252367e9a82116110a52b908a4464993bbae6.css" />
+    
+    <script src="../js/toc-drawer.min.b46fda7d6dea62bcc1a6f95e98235cd5f8abea27fa203eb59ddb86107c68bd04.js" defer></script>
+  </head>
+  <body class="sg-body">
+    <a class="sg-skip-link" href="#sg-main">Skip to main content</a>
+
+     
+<nav class="sg-breadcrumb" aria-label="Journey progress">
+  <ol class="sg-breadcrumb__segments">
+       
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--future">
+      <a
+        class="sg-breadcrumb__link"
+        href="../before-you-leave/"
+        aria-label="Section 1: Before You Leave"
+        
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+       
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--future">
+      <a
+        class="sg-breadcrumb__link"
+        href="../getting-here/"
+        aria-label="Section 2: Getting Here"
+        
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+       
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--future">
+      <a
+        class="sg-breadcrumb__link"
+        href="../arriving/"
+        aria-label="Section 3: Arriving"
+        
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+       
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--future">
+      <a
+        class="sg-breadcrumb__link"
+        href="../finding-your-way/"
+        aria-label="Section 4: Finding Your Way"
+        
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+       
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--future">
+      <a
+        class="sg-breadcrumb__link"
+        href="../schedule/"
+        aria-label="Section 5: The Schedule"
+        
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+       
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--future">
+      <a
+        class="sg-breadcrumb__link"
+        href="../people-and-spaces/"
+        aria-label="Section 6: People and Spaces"
+        
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+       
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--future">
+      <a
+        class="sg-breadcrumb__link"
+        href="../how-we-gather/"
+        aria-label="Section 7: How We Gather"
+        
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+       
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--future">
+      <a
+        class="sg-breadcrumb__link"
+        href="../nearby/"
+        aria-label="Section 8: Nearby"
+        
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+       
+    <li class="sg-breadcrumb__segment sg-breadcrumb__segment--future">
+      <a
+        class="sg-breadcrumb__link"
+        href="../before-you-go/"
+        aria-label="Section 9: Before You Go"
+        
+      >
+        <span class="sg-breadcrumb__dot" aria-hidden="true"></span>
+      </a>
+    </li>
+    
+  </ol>
+  <span class="sg-breadcrumb__label">
+     Summit
+    Guide 
+  </span>
+</nav>
+
+
+    <button
+      class="sg-toc-trigger"
+      type="button"
+      aria-label="Table of Contents"
+      aria-expanded="false"
+      aria-controls="sg-toc-drawer"
+    >
+      <span class="sg-toc-trigger__icon" aria-hidden="true">&#9776;</span>
+      <span class="sg-toc-trigger__label">Contents</span>
+    </button>
+
+    <div
+      id="sg-toc-drawer"
+      class="sg-toc-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Table of Contents and Key"
+      hidden
+    >
+      <div class="sg-toc-drawer__panel">
+        <button
+          class="sg-toc-drawer__close"
+          aria-label="Close table of contents"
+          type="button"
+        >
+          &times;
+        </button>
+        <div
+          class="sg-toc-drawer__tabs"
+          role="tablist"
+          aria-label="Reference panels"
+        >
+          <button
+            class="sg-toc-drawer__tab"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="sg-toc-panel-contents"
+          >
+            Contents
+          </button>
+          <button
+            class="sg-toc-drawer__tab"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="sg-toc-panel-key"
+          >
+            Key
+          </button>
+        </div>
+        <div
+          id="sg-toc-panel-contents"
+          class="sg-toc-drawer__panel-content"
+          role="tabpanel"
+        >
+          <ol class="sg-toc-list">
+            
+            <li
+              class="sg-toc-list__item "
+            >
+              <a
+                class="sg-toc-list__link"
+                href="../before-you-leave/"
+              >
+                <span class="sg-toc-list__number">1</span>
+                <span class="sg-toc-list__title">Before You Leave</span>
+              </a>
+            </li>
+            
+            <li
+              class="sg-toc-list__item "
+            >
+              <a
+                class="sg-toc-list__link"
+                href="../getting-here/"
+              >
+                <span class="sg-toc-list__number">2</span>
+                <span class="sg-toc-list__title">Getting Here</span>
+              </a>
+            </li>
+            
+            <li
+              class="sg-toc-list__item "
+            >
+              <a
+                class="sg-toc-list__link"
+                href="../arriving/"
+              >
+                <span class="sg-toc-list__number">3</span>
+                <span class="sg-toc-list__title">Arriving</span>
+              </a>
+            </li>
+            
+            <li
+              class="sg-toc-list__item "
+            >
+              <a
+                class="sg-toc-list__link"
+                href="../finding-your-way/"
+              >
+                <span class="sg-toc-list__number">4</span>
+                <span class="sg-toc-list__title">Finding Your Way</span>
+              </a>
+            </li>
+            
+            <li
+              class="sg-toc-list__item "
+            >
+              <a
+                class="sg-toc-list__link"
+                href="../schedule/"
+              >
+                <span class="sg-toc-list__number">5</span>
+                <span class="sg-toc-list__title">The Schedule</span>
+              </a>
+            </li>
+            
+            <li
+              class="sg-toc-list__item "
+            >
+              <a
+                class="sg-toc-list__link"
+                href="../people-and-spaces/"
+              >
+                <span class="sg-toc-list__number">6</span>
+                <span class="sg-toc-list__title">People and Spaces</span>
+              </a>
+            </li>
+            
+            <li
+              class="sg-toc-list__item "
+            >
+              <a
+                class="sg-toc-list__link"
+                href="../how-we-gather/"
+              >
+                <span class="sg-toc-list__number">7</span>
+                <span class="sg-toc-list__title">How We Gather</span>
+              </a>
+            </li>
+            
+            <li
+              class="sg-toc-list__item "
+            >
+              <a
+                class="sg-toc-list__link"
+                href="../nearby/"
+              >
+                <span class="sg-toc-list__number">8</span>
+                <span class="sg-toc-list__title">Nearby</span>
+              </a>
+            </li>
+            
+            <li
+              class="sg-toc-list__item "
+            >
+              <a
+                class="sg-toc-list__link"
+                href="../before-you-go/"
+              >
+                <span class="sg-toc-list__number">9</span>
+                <span class="sg-toc-list__title">Before You Go</span>
+              </a>
+            </li>
+            
+          </ol>
+        </div>
+        <div
+          id="sg-toc-panel-key"
+          class="sg-toc-drawer__panel-content"
+          role="tabpanel"
+          hidden
+        >
+          
+        </div>
+      </div>
+    </div>
+
+    <main id="sg-main">
+<section
+  class="sg-section"
+  aria-labelledby="sg-section-title"
+  data-section="0"
+>
+  
+  <article class="sg-page sg-page--single sg-page--section-landing">
+    <div class="sg-page__content">
+      <header class="sg-section-landing__header">
+        
+        <h1 id="sg-section-title" class="sg-section-landing__title">
+          Component Demo
+        </h1>
+        
+        <p class="sg-section-landing__summary">A visual reference showing every booklet UI component. Intended for reviewer verification against the visual system spec.</p>
+        
+      </header>
+
+      <div class="sg-section-landing__body"><h2 id="callouts">Callouts</h2>
+<p>A callout is an italic emphasis block with a left rule, used for pulled quotes or highlighted passages.</p>
+   
+<aside class="sg-callout" role="complementary">
+  <span class="sg-callout__text">A great summit feels like someone thought about the details before you arrived — not like a conference that happens to be in a nice room.</span>
+  
+  <span class="sg-callout__attribution">— §4 Finding Your Way</span>
+  
+</aside>
+
+
+<h2 id="stamps">Stamps</h2>
+<p>A stamp marks content with special status. Use it sparingly — at most once per section.</p>
+  
+
+
+<span class="sg-stamp" aria-label="IMPORTANT">
+  IMPORTANT
+</span>
+
+
+  
+
+
+<span class="sg-stamp sg-stamp--circle" aria-label="LOCAL TIP">
+  LOCAL TIP
+</span>
+
+
+<h2 id="travellers-notes">Traveller&rsquo;s Notes</h2>
+<p>A traveller&rsquo;s note is a personal aside rendered in the annotation font, in a surface-coloured box with a subtle shadow — like a sticky note tucked into the booklet.</p>
+   
+<aside class="sg-travellers-note" role="note">
+  
+  <span class="sg-travellers-note__heading">LOCAL TIP</span>
+  
+  <span class="sg-travellers-note__text">The almond croissant at the bakery on the corner is the move. Go before 10am.</span>
+</aside>
+
+
+   
+<aside class="sg-travellers-note" role="note">
+  
+  <span class="sg-travellers-note__text">No heading — just a quiet observation tucked into the margin, handwritten in tone.</span>
+</aside>
+
+
+<h2 id="marginalia">Marginalia</h2>
+<p>A marginalia note is rendered in Caveat, the annotation font, at <code>--sg-font-size-marginalia</code> in <code>--sg-color-annotation-ink</code>. The existing front-matter marginalia list renders through the <code>marginalia</code> partial; this shortcode lets authors drop a single note inline.</p>
+  
+<aside class="sg-marginalia" aria-label="Margin note">
+  <p class="sg-marginalia__note sg-marginalia__note--right-margin">
+    <span class="sg-marginalia__cue" aria-hidden="true"></span>
+    <span class="sg-marginalia__text">The office runs cold — trust us on the jacket.</span>
+  </p>
+</aside>
+
+<h2 id="spread-dividers">Spread Dividers</h2>
+<p>A section divider is a centered horizontal rule at 25% page width with an optional section mark.</p>
+  */}} 
+<div
+  class="sg-spread-divider"
+  role="separator"
+  aria-label="Section transition: §4"
+>
+  <span class="sg-spread-divider__mark">§4</span>
+</div>
+
+
+<p>A divider without a label renders as a plain rule:</p>
+  */}} 
+<div
+  class="sg-spread-divider"
+  role="separator"
+  aria-label=""
+>
+  <span class="sg-spread-divider__mark"></span>
+</div>
+
+
+<h2 id="dog-ears">Dog-Ears</h2>
+<p>A dog-ear panel has a folded corner effect — like a page that has been turned down. The inner content is whatever you wrap in the shortcode.</p>
+   
+
+
+<div class="sg-dog-ear">
+  
+
+A dog-eared panel can contain **any Markdown content** — paragraphs, lists, even other components.
+
+- This looks like a page corner has been folded down
+- The shadow gives it depth on the paper surface
+- Use `position="left"` for the other corner
+
+
+</div>
+
+
+   
+
+
+<div class="sg-dog-ear sg-dog-ear--left">
+  
+
+Left-side dog-ear: the fold is in the upper-left instead of upper-right.
+
+
+</div>
+
+
+<h2 id="page-number-flourish">Page-Number Flourish</h2>
+<p>A flourished page number adds decorative rules on each side of the number — a small touch that makes the page feel designed.</p>
+   
+<footer class="sg-page__number sg-page-number--flourished">
+  <span class="sg-page__number-text">42</span>
+</footer>
+
+
+<h2 id="key--legend-box">Key / Legend Box</h2>
+<p>A key (or legend) pairs symbols with their meanings in a compact, scannable grid. Below is a legend for wayfinding icons, resolved from <code>data/index_icons.yaml</code>:</p>
+              
+                                                        
+                                                      
+                                                        
+                                                              
+                                                  
+                                                  
+                                 
+<aside
+  class="sg-key-legend"
+  role="complementary"
+  aria-label="Wayfinding Icons"
+>
+  
+  <span class="sg-key-legend__heading">Wayfinding Icons</span>
+   
+  <ul class="sg-key-legend__list">
+    
+    <li class="sg-key-legend__entry">
+      <span class="sg-key-legend__icon" aria-hidden="true">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+    
+  
+  <svg aria-hidden="true" class="sg-key-legend__icon-img" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M9 10v7m0-4h6m0-3v7m-8-7c0-1.5 1-3 2.5-3h5C16 7 17 8.5 17 10"/></svg>
+
+
+      </span>
+      <span class="sg-key-legend__label">Restroom location</span>
+    </li>
+    
+    <li class="sg-key-legend__entry">
+      <span class="sg-key-legend__icon" aria-hidden="true">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+    
+  
+  <svg aria-hidden="true" class="sg-key-legend__icon-img" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><rect width="12" height="10" x="5" y="6" stroke="currentColor" stroke-width="1.5" rx="1.5"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M17 9h1.5a1.5 1.5 0 0 1 0 3H17M8 4v2m4-3v2M9 18l-.5 3m4.5-3 .5 3"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.2" d="M8 9c.5-1 1.5-1.5 2-1.5m2 1c.5-.5 1-.5 1.5-.5" opacity=".6"/></svg>
+
+
+      </span>
+      <span class="sg-key-legend__label">Coffee and beverage station</span>
+    </li>
+    
+    <li class="sg-key-legend__entry">
+      <span class="sg-key-legend__icon" aria-hidden="true">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+    
+  
+  <svg aria-hidden="true" class="sg-key-legend__icon-img" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="7" cy="18" r="3" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M10 18c2-1.5 3.5-4.5 3.5-7m0 0C15 8.5 17 7 19 7"/><circle cx="18" cy="8" r="1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+
+
+      </span>
+      <span class="sg-key-legend__label">Wi-Fi available</span>
+    </li>
+    
+    <li class="sg-key-legend__entry">
+      <span class="sg-key-legend__icon" aria-hidden="true">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+    
+  
+  <svg aria-hidden="true" class="sg-key-legend__icon-img" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M9 10c0-1.5 1-3 3-3s3 1.5 3 3c0 2-2 4-3 5m0-3v3"/><rect width="8" height="1.5" x="8" y="7" stroke="currentColor" stroke-width="1.2" rx=".5"/></svg>
+
+
+      </span>
+      <span class="sg-key-legend__label">Step-free and accessible route</span>
+    </li>
+    
+    <li class="sg-key-legend__entry">
+      <span class="sg-key-legend__icon" aria-hidden="true">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+    
+  
+  <svg aria-hidden="true" class="sg-key-legend__icon-img" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><rect width="16" height="14" x="4" y="5" stroke="currentColor" stroke-width="1.5" rx="2"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M12 8v8m-4-4h8"/></svg>
+
+
+      </span>
+      <span class="sg-key-legend__label">First aid and medical</span>
+    </li>
+    
+    <li class="sg-key-legend__entry">
+      <span class="sg-key-legend__icon" aria-hidden="true">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+    
+  
+  <svg aria-hidden="true" class="sg-key-legend__icon-img" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M12 16v-4.5"/><circle cx="12" cy="8" r="1" fill="currentColor"/></svg>
+
+
+      </span>
+      <span class="sg-key-legend__label">General information point</span>
+    </li>
+    
+    <li class="sg-key-legend__entry">
+      <span class="sg-key-legend__icon" aria-hidden="true">
+        
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+    
+  
+  <svg aria-hidden="true" class="sg-key-legend__icon-img" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linejoin="round" stroke-width="1.5" d="M12 2C8.5 2 5.5 5 5.5 8.5 5.5 11.5 8 14 12 22c4-8 6.5-10.5 6.5-13.5C18.5 5 15.5 2 12 2z"/><circle cx="12" cy="8.5" r="2" stroke="currentColor" stroke-width="1.2"/></svg>
+
+
+      </span>
+      <span class="sg-key-legend__label">Location marker</span>
+    </li>
+    
+  </ul>
+  
+</aside>
+
+
+</div>
+    </div>
+
+    
+  </article>
+
+     
+</section>
+
+    
+<nav class="sg-section-nav" aria-label="Section navigation">
+  <a
+    class="sg-section-nav__next"
+    href="../before-you-leave/"
+  >
+    <span class="sg-section-nav__label">Begin</span>
+    <span class="sg-section-nav__title"
+      >Section 1: Before You Leave &rarr;</span
+    >
+  </a>
+</nav>
+
+ </main>
+
+     
+<footer class="sg-support" role="contentinfo">
+  <div class="sg-support__inner">
+    <span class="sg-support__item">
+      <span class="sg-support__label">Emergency:</span>
+      <span class="sg-support__value">&#43;1-555-0123</span>
+    </span>
+    <span class="sg-support__item">
+      <span class="sg-support__label">Address:</span>
+      <span class="sg-support__value">42 Summit Street, Downtown District</span>
+    </span>
+    <span class="sg-support__item">
+      <span class="sg-support__label">Lost &amp; Found:</span>
+      <span class="sg-support__value">Welcome desk — through the end of the month.</span>
+    </span>
+    <span class="sg-support__help">If you need help right now, find any staff member or visit the welcome desk.</span>
+  </div>
+</footer>
+
+
+  </body>
+</html>

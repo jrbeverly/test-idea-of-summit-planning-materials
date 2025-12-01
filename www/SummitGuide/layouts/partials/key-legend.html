@@ -1,0 +1,30 @@
+{{/* Key / Legend box — compact reference pairing symbols/icons with meanings.
+Visual system spec §5.3, §7.4: icon grid with labels, for maps and directories.
+Parameters (dict): heading — legend heading, e.g. "Map Key" (optional) entries —
+list of entries, each with: icon — illustration name (e.g. "icons/pin") label —
+meaning text (e.g. "Location marker") Usage from template: {{ partial
+"key-legend" (dict "heading" "Icons" "entries" (slice (dict "icon"
+"icons/coffee" "label" "Coffee station") (dict "icon" "icons/restroom" "label"
+"Restroom") ) ) }} */}} {{ $heading := .heading | default "" }} {{ $entries :=
+.entries | default slice }}
+<aside
+  class="sg-key-legend"
+  role="complementary"
+  aria-label="{{ with $heading }}{{ . }}{{ else }}Key{{ end }}"
+>
+  {{ with $heading }}
+  <span class="sg-key-legend__heading">{{ . }}</span>
+  {{ end }} {{ with $entries }}
+  <ul class="sg-key-legend__list">
+    {{ range . }}
+    <li class="sg-key-legend__entry">
+      <span class="sg-key-legend__icon" aria-hidden="true">
+        {{ partial "illustration" (dict "name" .icon "class"
+        "sg-key-legend__icon-img" "width" "24" "height" "24") }}
+      </span>
+      <span class="sg-key-legend__label">{{ .label }}</span>
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</aside>

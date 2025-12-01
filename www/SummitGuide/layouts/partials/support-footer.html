@@ -1,0 +1,21 @@
+{{/* Support & Emergency footer — cross-cutting element X3. Persistent, calm,
+findable in under 3 seconds. Data: data/support.yaml */}} {{ with
+hugo.Data.support }}
+<footer class="sg-support" role="contentinfo">
+  <div class="sg-support__inner">
+    <span class="sg-support__item">
+      <span class="sg-support__label">Emergency:</span>
+      <span class="sg-support__value">{{ .emergency_contact }}</span>
+    </span>
+    <span class="sg-support__item">
+      <span class="sg-support__label">Address:</span>
+      <span class="sg-support__value">{{ .venue_address }}</span>
+    </span>
+    <span class="sg-support__item">
+      <span class="sg-support__label">Lost &amp; Found:</span>
+      <span class="sg-support__value">{{ .lost_and_found }}</span>
+    </span>
+    <span class="sg-support__help">{{ .help_sentence }}</span>
+  </div>
+</footer>
+{{ end }}

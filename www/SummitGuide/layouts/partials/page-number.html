@@ -1,0 +1,7 @@
+{{/* Page number — bare number rendered in the page footer corner. Visual system
+spec §7.1: bare number, --sg-font-mono, --sg-font-size-page-number,
+--sg-color-ink-muted. Context: page number (int) */}} {{ $number := . | default
+0 | int }}
+<footer class="sg-page__number">
+  <span class="sg-page__number-text">{{ $number }}</span>
+</footer>

@@ -1,0 +1,3 @@
+{{/* Page-number flourish shortcode — for use in Markdown content. Usage: {{<
+page-number-flourish number="42" >}} */}} {{ $number := .Get "number" | default
+0 | int }} {{ partial "page-number-flourish" $number }}

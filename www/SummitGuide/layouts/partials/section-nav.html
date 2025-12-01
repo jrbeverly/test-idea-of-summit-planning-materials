@@ -1,0 +1,43 @@
+{{/* Prev / Next section navigation. Navigates between sections at chapter
+boundaries. Data: data/toc.yaml, .Params.journey_step */}} {{ $currentStep :=
+.Params.journey_step | default 0 | int }} {{ if eq $currentStep 0 }} {{/* Guide
+cover — no prev, next points to section 1 */}} {{ $first := index
+hugo.Data.toc.sections 0 }}
+<nav class="sg-section-nav" aria-label="Section navigation">
+  <a
+    class="sg-section-nav__next"
+    href="{{ $.Site.Home.RelPermalink }}{{ $first.slug }}/"
+  >
+    <span class="sg-section-nav__label">Begin</span>
+    <span class="sg-section-nav__title"
+      >Section 1: {{ $first.title }} &rarr;</span
+    >
+  </a>
+</nav>
+{{ else }} {{ $sections := hugo.Data.toc.sections }} {{ $prevStep := sub
+$currentStep 1 }} {{ $nextStep := add $currentStep 1 }}
+<nav class="sg-section-nav" aria-label="Section navigation">
+  {{ if ge $prevStep 1 }} {{ range where $sections "number" $prevStep }}
+  <a
+    class="sg-section-nav__prev"
+    href="{{ $.Site.Home.RelPermalink }}{{ .slug }}/"
+  >
+    <span class="sg-section-nav__label">&larr; Previous</span>
+    <span class="sg-section-nav__title"
+      >Section {{ .number }}: {{ .title }}</span
+    >
+  </a>
+  {{ end }} {{ end }} {{ if le $nextStep 9 }} {{ range where $sections "number"
+  $nextStep }}
+  <a
+    class="sg-section-nav__next"
+    href="{{ $.Site.Home.RelPermalink }}{{ .slug }}/"
+  >
+    <span class="sg-section-nav__label">Next &rarr;</span>
+    <span class="sg-section-nav__title"
+      >Section {{ .number }}: {{ .title }}</span
+    >
+  </a>
+  {{ end }} {{ end }}
+</nav>
+{{ end }}

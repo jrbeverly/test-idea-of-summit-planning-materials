@@ -1,0 +1,40 @@
+{{/* Section landing page — single page that opens a journey section. Type:
+section-landing, Spread: single-page */}}
+<article
+  class="sg-page sg-page--single sg-page--section-landing"
+  aria-labelledby="sg-section-{{ .Params.journey_step }}-title"
+  data-section="{{ .Params.journey_step }}"
+  data-spread-number="{{ .Params.spread_number }}"
+>
+  <div class="sg-page__content">
+    <header class="sg-section-landing__header">
+      <span class="sg-section-landing__number" aria-hidden="true">
+        Section {{ .Params.journey_step }}
+      </span>
+      <h1
+        id="sg-section-{{ .Params.journey_step }}-title"
+        class="sg-section-landing__title"
+      >
+        {{ .Title }}
+      </h1>
+      {{ with .Params.summary }}
+      <p class="sg-section-landing__summary">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    <div class="sg-section-landing__body">{{ .Content }}</div>
+
+    {{ with .Params.illustrations }}
+    <div
+      class="sg-section-landing__illustration"
+      role="img"
+      aria-label="Section illustration"
+    >
+      {{ range . }} {{ partial "illustration" (dict "name" . "class"
+      "sg-section-landing__illustration-svg") }} {{ end }}
+    </div>
+    {{ end }}
+  </div>
+
+  {{ partial "page-number" .Params.page_number }}
+</article>

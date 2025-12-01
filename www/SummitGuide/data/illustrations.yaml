@@ -1,0 +1,132 @@
+# Illustration index — available illustrations for content authors.
+# Reference illustrations in front matter with the `illustrations:` key.
+# Usage: `illustrations: [spot/compass]` or `{{< illustration "spot/compass" >}}`
+#
+# Categories: spot (section openers, decorative), icons (24x24 symbols),
+#   stamps (arrival/check-in markers), maps (cartographic illustrations),
+#   page (rules, dividers, flourishes)
+
+spot:
+  - name: suitcase
+    description: Open suitcase or packed bag — travel preparation
+    section: 1
+    size: 120x96
+  - name: street-sign
+    description: Street sign and building silhouette — wayfinding
+    section: 2
+    size: 120x96
+  - name: building-entrance
+    description: Building entrance from the attendee's perspective
+    section: 3
+    size: 120x96
+  - name: compass
+    description: Compass rose — orientation and navigation
+    section: 4
+    size: 120x96
+  - name: day-arc
+    description: Sun rising overhead to setting — the day's rhythm
+    section: 5
+    size: 120x96
+  - name: group-figures
+    description: Stylized group of small figures — people and community
+    section: 6
+    size: 120x96
+  - name: circle-people
+    description: People seated in a circle — gathering and conversation
+    section: 7
+    size: 120x96
+  - name: streetlamp
+    description: Streetlamp — neighbourhood and local exploration
+    section: 8
+    size: 120x96
+  - name: notebook
+    description: Closed notebook with bookmark — closing and reflection
+    section: 9
+    size: 120x96
+
+maps:
+  - name: area-map
+    description: Annotated area map showing office building and surrounding blocks with transit
+    section: 2
+    size: 640x440
+  - name: floor-plan
+    description: Office floor plan with numbered callouts for all key rooms and amenities
+    section: 4
+    size: 640x480
+  - name: agenda-overview
+    description: Three-day schedule overview as a visual day-arc timeline
+    section: 5
+    size: 640x340
+  - name: neighbourhood-map
+    description: Hand-drawn neighbourhood sketch map with marked spots for coffee, food, park, and services
+    section: 8
+    size: 640x440
+
+stamps:
+  - name: arrived
+    description: '"ARRIVED" rubber-stamp mark — use on arrival or check-in pages'
+    section: 3
+    size: 120x48
+  - name: checked-in
+    description: '"CHECKED" circular stamp — use at the welcome desk moment'
+    section: 3
+    size: 120x48
+  - name: departed
+    description: '"DEPARTED" dashed-outline stamp — use on departure pages'
+    section: 9
+    size: 120x48
+
+page:
+  - name: section-divider
+    description: Ornamental section divider with center circle
+    size: 120x16
+  - name: rule-ornament
+    description: Decorative rule with three dots — light content separator
+    size: 120x8
+  - name: corner-flourish
+    description: Small corner bracket — page-edge decoration
+    size: 32x32
+
+icons:
+  # Wayfinding
+  - name: restroom
+    description: Restroom location
+  - name: quiet-zone
+    description: Quiet room or quiet zone
+  - name: coffee
+    description: Coffee and beverage station
+  - name: wifi
+    description: Wi-Fi available
+  - name: emergency-exit
+    description: Emergency exit
+  - name: info
+    description: General information point
+  - name: first-aid
+    description: First aid and medical
+  - name: phone
+    description: Phone and contact point
+  - name: pin
+    description: Location marker
+  # Session types
+  - name: talk
+    description: Talk or presentation session type
+  - name: workshop
+    description: Workshop or interactive session type
+  - name: break
+    description: Break period
+  - name: meal
+    description: Meal period
+  - name: social
+    description: Social event or gathering
+  # Transport
+  - name: bike
+    description: Bicycle parking
+  - name: parking
+    description: Car parking
+  - name: stairs
+    description: Stair location
+  - name: elevator
+    description: Elevator location
+  # Access
+  - name: accessibility
+    description: Step-free and accessible route

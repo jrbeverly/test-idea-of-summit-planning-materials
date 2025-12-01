@@ -1,0 +1,43 @@
+{{/* Two-page spread — the default spread layout. Content fills two facing pages
+with a center gutter. Type: spread, Spread: two-page-spread, Layout: (default)
+*/}} {{ $pageNumber := .Params.page_number | default 0 | int }}
+<div
+  class="sg-spread sg-spread--two-page"
+  aria-label="{{ .Title }}"
+  data-spread-number="{{ .Params.spread_number }}"
+>
+  {{/* Left page */}}
+  <article
+    class="sg-page sg-page--left"
+    aria-labelledby="sg-page-{{ $pageNumber }}-title"
+    data-page-number="{{ $pageNumber }}"
+  >
+    <div class="sg-page__content">
+      {{ partial "spread-header" (dict "title" .Title "summary" .Params.summary
+      "illustrations" .Params.illustrations "heading_level" 2 "heading_id"
+      (printf "sg-page-%d-title" $pageNumber) ) }}
+
+      <div class="sg-page__body">{{ .Content }}</div>
+    </div>
+
+    {{ partial "marginalia" . }} {{ partial "page-number" $pageNumber }}
+  </article>
+
+  {{/* Right page */}}
+  <article
+    class="sg-page sg-page--right"
+    aria-label="Page {{ add $pageNumber 1 }}"
+    data-page-number="{{ add $pageNumber 1 }}"
+  >
+    <div class="sg-page__content">
+      {{/* Right page is a slot for associated content: illustrations,
+      cross-references, and marginalia that belong opposite the main text.
+      Populated via shortcodes or page resources. */}}
+    </div>
+
+    {{ partial "page-number" (add $pageNumber 1) }}
+  </article>
+
+  {{/* Gutter / binding indicator */}}
+  <div class="sg-spread__gutter" aria-hidden="true"></div>
+</div>

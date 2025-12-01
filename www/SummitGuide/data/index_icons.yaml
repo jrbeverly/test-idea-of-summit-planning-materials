@@ -1,0 +1,74 @@
+# Icon Key
+# Cross-cutting element X2 — drives the Index/Key drawer.
+# Every recurring symbol in the guide, its meaning, and where it appears.
+# Source: invented-for-demo.
+
+categories:
+  - name: 'Wayfinding'
+    icons:
+      - token: 'restroom'
+        meaning: 'Restroom location'
+        appears_in: ['Map (4.1)', 'Key (X2)']
+      - token: 'quiet-zone'
+        meaning: 'Quiet room or quiet zone'
+        appears_in: ['Map (4.1)', 'Key (X2)']
+      - token: 'coffee'
+        meaning: 'Coffee and beverage station'
+        appears_in: ['Map (4.1)', 'Key (X2)', 'Nearby (8.2)']
+      - token: 'wifi'
+        meaning: 'Wi-Fi available'
+        appears_in: ['Wayfinding (4.3)', 'Key (X2)']
+      - token: 'emergency-exit'
+        meaning: 'Emergency exit'
+        appears_in: ['Map (4.1)', 'Key (X2)', 'Support (X3)']
+      - token: 'accessibility'
+        meaning: 'Step-free and accessible route'
+        appears_in: ['Transit (2.2)', 'Map (4.1)', 'Key (X2)']
+      - token: 'stairs'
+        meaning: 'Stair location'
+        appears_in: ['Map (4.1)', 'Transit (2.2)']
+      - token: 'elevator'
+        meaning: 'Elevator location'
+        appears_in: ['Map (4.1)', 'Transit (2.2)']
+      - token: 'pin'
+        meaning: 'Location marker'
+        appears_in: ['Maps (2.1, 4.1, 8.1)']
+      - token: 'info'
+        meaning: 'General information point'
+        appears_in: ['Support (X3)', 'Wayfinding (4.3)']
+      - token: 'first-aid'
+        meaning: 'First aid and medical'
+        appears_in: ['Map (4.1)', 'Support (X3)', 'Key (X2)']
+
+  - name: 'Session Types'
+    icons:
+      - token: 'talk'
+        meaning: 'Talk or presentation'
+        appears_in: ['Schedule (5.1–5.3)', 'Key (X2)']
+      - token: 'workshop'
+        meaning: 'Workshop or interactive session'
+        appears_in: ['Schedule (5.1–5.3)', 'Key (X2)']
+
+  - name: 'Amenities'
+    icons:
+      - token: 'break'
+        meaning: 'Break period'
+        appears_in: ['Schedule (5.1–5.3)', 'Key (X2)']
+      - token: 'meal'
+        meaning: 'Meal period'
+        appears_in: ['Schedule (5.1–5.3)', 'Key (X2)']
+      - token: 'social'
+        meaning: 'Social event or gathering'
+        appears_in: ['Schedule (5.1–5.2)', 'Key (X2)']
+
+  - name: 'Transport'
+    icons:
+      - token: 'bike'
+        meaning: 'Bicycle parking'
+        appears_in: ['Transit (2.2)', 'Key (X2)']
+      - token: 'parking'
+        meaning: 'Car parking'
+        appears_in: ['Transit (2.2)']
+      - token: 'phone'
+        meaning: 'Phone and contact point'
+        appears_in: ['Support (X3)']

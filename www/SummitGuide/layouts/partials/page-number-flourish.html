@@ -1,0 +1,8 @@
+{{/* Page-number flourish — page number with ornamental rule lines on each side.
+Wraps the standard page-number partial output with decorative flourishes.
+Parameters: number — page number (int) Usage from template (replaces direct
+page-number partial): {{ partial "page-number-flourish" $pageNumber }} */}} {{
+$number := . | default 0 | int }}
+<footer class="sg-page__number sg-page-number--flourished">
+  <span class="sg-page__number-text">{{ $number }}</span>
+</footer>

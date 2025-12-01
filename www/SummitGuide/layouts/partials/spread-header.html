@@ -1,0 +1,19 @@
+{{/*
+  Common spread/page header: title, summary, and optional illustration reference.
+  Used by section landings and content spreads.
+*/}}
+<header class="sg-spread-header">
+  <h{{ with .heading_level }}{{ . }}{{ else }}2{{ end }} class="sg-spread-header__title">
+    {{ .title }}
+  </h{{ with .heading_level }}{{ . }}{{ else }}2{{ end }}>
+  {{ with .summary }}
+    <p class="sg-spread-header__summary">{{ . }}</p>
+  {{ end }}
+  {{ with .illustrations }}
+    <div class="sg-spread-header__illustration" role="img" aria-label="Section illustration">
+      {{ range . }}
+        {{ partial "illustration" (dict "name" . "class" "sg-spread-header__illustration-svg") }}
+      {{ end }}
+    </div>
+  {{ end }}
+</header>

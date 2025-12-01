@@ -1,0 +1,67 @@
+/* Summit Guide font loading — self-hosted woff2, no third-party CDN requests.
+ *
+ * Preload strategy:
+ *   The body font (Newsreader) is on every page and is preloaded with
+ *   <link rel="preload" as="font" crossorigin> in <head> via baseof.html.
+ *   Caveat, and Space Mono use font-display: swap so text is
+ *   never invisible during load.
+ *
+ * Visual system spec reference:
+ *   --sg-font-display:   Newsreader (optical size: display, via opsz axis)
+ *   --sg-font-body:      Newsreader (optical size: text, via opsz axis)
+ *   --sg-font-annotation: Caveat
+ *   --sg-font-mono:      Space Mono
+ */
+
+/* Newsreader — variable font with wght (200–800) and opsz axes.
+  A single file covers both body text and display headings.
+  Optical sizing is automatic via font-optical-sizing: auto (browser default). */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('../fonts/newsreader-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+/* Space Mono */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/space-mono-latin-400.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/space-mono-latin-700.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+/* Caveat — marginalia, annotations */
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/caveat-latin-400.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}

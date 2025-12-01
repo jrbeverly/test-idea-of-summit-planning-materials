@@ -1,0 +1,15 @@
+# People Index
+# Cross-cutting element X2 — drives the Index/Key drawer.
+# Every named person in the guide, one line, with section references.
+# Source: invented-for-demo.
+
+people:
+  - slug: 'host'
+    name: 'The Host'
+    description: 'Opens each day, closes each evening, and keeps things moving.'
+    section_refs: [5, 6]
+
+  - slug: 'welcome-host'
+    name: 'Welcome Host'
+    description: 'The first face you see at the welcome desk each morning.'
+    section_refs: [3, 6]

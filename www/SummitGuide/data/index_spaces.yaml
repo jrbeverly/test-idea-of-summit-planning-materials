@@ -1,0 +1,59 @@
+# Spaces Index
+# Cross-cutting element X2 — drives the Index/Key drawer.
+# Every named space in the guide, one line, with section references and map callout numbers.
+# Source: invented-for-demo.
+
+spaces:
+  - slug: 'main-entrance'
+    name: 'Main Entrance'
+    description: 'Green door on the east side of the building.'
+    callout_number: 1
+    section_refs: [2, 3, 4]
+
+  - slug: 'welcome-desk'
+    name: 'Welcome Desk'
+    description: 'Check in, pick up your badge, and ask questions.'
+    callout_number: 2
+    section_refs: [3, 4]
+
+  - slug: 'main-hall'
+    name: 'Main Hall'
+    description: 'Large open room for opening circle, keynote sessions, and closing gatherings.'
+    callout_number: 3
+    section_refs: [4, 5, 6]
+
+  - slug: 'workshop-room'
+    name: 'Workshop Room'
+    description: 'Collaborative space — tables move, walls are writable, ideas are welcome.'
+    callout_number: 4
+    section_refs: [4, 5, 6]
+
+  - slug: 'quiet-lounge'
+    name: 'Quiet Lounge'
+    description: 'A calm space for reading, thinking, or stepping away from the energy.'
+    callout_number: 5
+    section_refs: [4, 6]
+
+  - slug: 'kitchen'
+    name: 'Kitchen'
+    description: 'Coffee, tea, and light snacks all day. The unofficial gathering spot between sessions.'
+    callout_number: 6
+    section_refs: [4, 5, 6]
+
+  - slug: 'transit-stop'
+    name: 'Transit Stop'
+    description: 'Central Station, a five-minute walk from the office.'
+    callout_number: null
+    section_refs: [2]
+
+  - slug: 'coat-room'
+    name: 'Coat Room'
+    description: 'Drop your bag and coat just past the welcome desk.'
+    callout_number: null
+    section_refs: [3]
+
+  - slug: 'bike-parking'
+    name: 'Bike Parking'
+    description: 'Racks on the east side, near the main entrance.'
+    callout_number: null
+    section_refs: [2]

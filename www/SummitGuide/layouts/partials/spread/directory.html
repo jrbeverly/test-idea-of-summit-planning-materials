@@ -1,0 +1,45 @@
+{{/* Directory page — compact reference keyed to map callout numbers. Type:
+directory, Spread: directory-page */}} {{ $pageNumber := .Params.page_number |
+default 0 | int }}
+<article
+  class="sg-page sg-page--single sg-page--directory"
+  aria-labelledby="sg-page-{{ $pageNumber }}-title"
+  data-spread-number="{{ .Params.spread_number }}"
+>
+  <div class="sg-page__content">
+    <header class="sg-spread-header">
+      <h2 id="sg-page-{{ $pageNumber }}-title" class="sg-spread-header__title">
+        {{ .Title }}
+      </h2>
+      {{ with .Params.summary }}
+      <p class="sg-spread-header__summary">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    <div class="sg-directory" role="list" aria-label="Directory entries">
+      {{ with .Params.callouts }} {{ range . }}
+      <div class="sg-directory__entry" role="listitem">
+        <span class="sg-directory__number" aria-hidden="true"
+          >{{ .number }}</span
+        >
+        <div class="sg-directory__body">
+          <span class="sg-directory__name">{{ .name }}</span>
+          <span class="sg-directory__desc">{{ .description }}</span>
+        </div>
+      </div>
+      {{ end }} {{ end }} {{ if not .Params.callouts }} {{ .Content }} {{ end }}
+    </div>
+  </div>
+
+  {{ partial "marginalia" . }} {{ partial "page-number" $pageNumber }} {{ with
+  .Params.illustrations }}
+  <div
+    class="sg-directory__illustration"
+    role="img"
+    aria-label="Directory illustration"
+  >
+    {{ range . }} {{ partial "illustration" (dict "name" . "class"
+    "sg-directory__illustration-svg") }} {{ end }}
+  </div>
+  {{ end }}
+</article>

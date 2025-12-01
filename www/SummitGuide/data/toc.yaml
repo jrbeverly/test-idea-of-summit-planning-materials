@@ -1,0 +1,58 @@
+# Table of Contents
+# Cross-cutting element X1 — drives the ToC drawer partial.
+# Source: invented-for-demo content, derived-from-template structure.
+
+sections:
+  - number: 1
+    title: 'Before You Leave'
+    slug: 'before-you-leave'
+    spread_count: 3
+    summary: 'What to pack, what to know, and what to expect before you head out the door.'
+
+  - number: 2
+    title: 'Getting Here'
+    slug: 'getting-here'
+    spread_count: 3
+    summary: 'Address, transit, landmarks, and access notes to get you to the door.'
+
+  - number: 3
+    title: 'Arriving'
+    slug: 'arriving'
+    spread_count: 3
+    summary: 'The moment of arrival: entering, checking in, and your first steps into the space.'
+
+  - number: 4
+    title: 'Finding Your Way'
+    slug: 'finding-your-way'
+    spread_count: 4
+    summary: 'Floor plans, key locations, wayfinding cues, and the information you need to navigate.'
+
+  - number: 5
+    title: 'The Schedule'
+    slug: 'schedule'
+    spread_count: 4
+    summary: 'Three days of sessions, breaks, meals, and gatherings.'
+
+  - number: 6
+    title: 'People and Spaces'
+    slug: 'people-and-spaces'
+    spread_count: 3
+    summary: 'The people who make the summit happen and the spaces they have prepared.'
+
+  - number: 7
+    title: 'How We Gather'
+    slug: 'how-we-gather'
+    spread_count: 2
+    summary: 'Meeting rhythms, social norms, rituals, and what participation looks like.'
+
+  - number: 8
+    title: 'Nearby'
+    slug: 'nearby'
+    spread_count: 3
+    summary: 'Coffee, lunch, parks, and useful services in the neighbourhood.'
+
+  - number: 9
+    title: 'Before You Go'
+    slug: 'before-you-go'
+    spread_count: 2
+    summary: 'Departure logistics, post-summit follow-up, and a warm closing note.'

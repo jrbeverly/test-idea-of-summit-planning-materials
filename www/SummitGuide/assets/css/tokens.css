@@ -1,0 +1,54 @@
+/* Design tokens generated from data/design/ — source of truth.
+  Color tokens mirror data/design/colors.yaml.
+  Typography tokens mirror data/design/typography.yaml.
+  Material, space, and page tokens are defined directly per visual-system-spec §2–§3. */
+
+:root {
+  /* ── Colors §2.1 ── */
+  {{- range $name, $value := hugo.Data.design.colors }}
+  --sg-color-{{ $name }}: {{ $value }};
+  {{- end }}
+
+  /* ── Typography §1 ── */
+  {{- range $name, $value := hugo.Data.design.typography.fonts }}
+  --sg-font-{{ $name }}: {{ $value }}, Georgia, 'Times New Roman', serif;
+  {{- end }}
+  {{- range $name, $value := hugo.Data.design.typography.scale }}
+  --sg-font-size-{{ $name }}: {{ $value }};
+  {{- end }}
+  {{- range $name, $value := hugo.Data.design.typography.leading }}
+  --sg-leading-{{ $name }}: {{ $value }};
+  {{- end }}
+  {{- range $name, $value := hugo.Data.design.typography.weights }}
+  --sg-font-weight-{{ $name }}: {{ $value }};
+  {{- end }}
+
+  /* ── Shadows §2.3 ── */
+  --sg-shadow-xs: 0 1px 2px rgba(44, 36, 22, 0.06);
+  --sg-shadow-sm: 0 2px 8px rgba(44, 36, 22, 0.10);
+  --sg-shadow-stamp: 0 0 0 1px rgba(199, 62, 58, 0.3), 0 1px 3px rgba(44, 36, 22, 0.12);
+  --sg-shadow-spread: 0 4px 24px rgba(44, 36, 22, 0.12), 0 1px 4px rgba(44, 36, 22, 0.06);
+
+  /* ── Radii §2.3 ── */
+  --sg-radius-sm: 2px;
+  --sg-radius-md: 4px;
+  --sg-radius-page: 1px;
+
+  /* ── Paper texture §2.3 ── */
+  --sg-texture-paper: url('../textures/paper-noise.svg');
+
+  /* ── Page layout §3.1 ── */
+  --sg-page-width: min(100% - 2rem, 42rem);
+  --sg-spread-width: min(100% - 2rem, 84rem);
+  --sg-page-padding-inline: 2rem;
+  --sg-page-padding-block: 3rem;
+  --sg-spread-gap: 3rem;
+
+  /* ── Spacing scale §3.2 ── */
+  --sg-space-xs: 0.5rem;
+  --sg-space-sm: 1rem;
+  --sg-space-md: 1.5rem;
+  --sg-space-lg: 2.5rem;
+  --sg-space-xl: 4rem;
+  --sg-space-section-gap: 5rem;
+}

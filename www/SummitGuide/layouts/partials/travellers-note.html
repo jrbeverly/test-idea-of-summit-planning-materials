@@ -1,0 +1,13 @@
+{{/* Traveller's Note — a tip or aside rendered in a sticky-note style box.
+Visual system spec §1.5 "Tip / aside": annotation font, surface background,
+subtle shadow, distinct from body text. Parameters (dict): text — note content
+(required) heading — optional heading displayed in mono above the note Usage
+from template: {{ partial "travellers-note" (dict "heading" "LOCAL TIP" "text"
+"The almond croissant is the move.") }} */}} {{ $text := .text }} {{ $heading :=
+.heading | default "" }}
+<aside class="sg-travellers-note" role="note">
+  {{ with $heading }}
+  <span class="sg-travellers-note__heading">{{ . }}</span>
+  {{ end }}
+  <span class="sg-travellers-note__text">{{ $text | markdownify }}</span>
+</aside>

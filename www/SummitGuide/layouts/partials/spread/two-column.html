@@ -1,0 +1,70 @@
+{{/* Two-column spread — each page split into two columns. Used for
+information-dense content: packing lists, directories, people lists. Type:
+spread, Spread: two-page-spread, Layout: two-column */}} {{ $pageNumber :=
+.Params.page_number | default 0 | int }}
+<div
+  class="sg-spread sg-spread--two-page sg-spread--two-column"
+  aria-label="{{ .Title }}"
+  data-spread-number="{{ .Params.spread_number }}"
+>
+  {{/* Left page */}}
+  <article
+    class="sg-page sg-page--left"
+    aria-labelledby="sg-page-{{ $pageNumber }}-title"
+    data-page-number="{{ $pageNumber }}"
+  >
+    <div class="sg-page__content sg-page__content--two-column">
+      <h2
+        id="sg-page-{{ $pageNumber }}-title"
+        class="sg-spread-header__title sg-column--span-2"
+      >
+        {{ .Title }}
+      </h2>
+      {{ with .Params.summary }}
+      <p class="sg-spread-header__summary sg-column--span-2">{{ . }}</p>
+      {{ end }}
+
+      <div class="sg-column sg-column--primary">{{ .Content }}</div>
+
+      <div class="sg-column sg-column--secondary">
+        {{/* Secondary column slot — marginalia, callouts, or supplemental
+        content. */}}
+      </div>
+    </div>
+
+    {{ partial "marginalia" . }} {{ partial "page-number" $pageNumber }}
+  </article>
+
+  {{/* Right page */}}
+  <article
+    class="sg-page sg-page--right"
+    aria-label="Page {{ add $pageNumber 1 }}"
+    data-page-number="{{ add $pageNumber 1 }}"
+  >
+    <div class="sg-page__content sg-page__content--two-column">
+      {{ with .Params.illustrations }}
+      <div
+        class="sg-column--span-2 sg-spread__illustration"
+        role="img"
+        aria-label="Spread illustration"
+      >
+        {{ range . }} {{ partial "illustration" (dict "name" . "class"
+        "sg-spread__illustration-svg") }} {{ end }}
+      </div>
+      {{ end }}
+
+      <div class="sg-column sg-column--primary">
+        {{/* Right page primary column — populated via shortcodes or page
+        resources. */}}
+      </div>
+      <div class="sg-column sg-column--secondary">
+        {{/* Right page secondary column — populated via shortcodes or page
+        resources. */}}
+      </div>
+    </div>
+
+    {{ partial "page-number" (add $pageNumber 1) }}
+  </article>
+
+  <div class="sg-spread__gutter" aria-hidden="true"></div>
+</div>

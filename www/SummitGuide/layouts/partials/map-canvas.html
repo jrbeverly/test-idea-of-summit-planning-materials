@@ -1,0 +1,62 @@
+{{/*
+  Map canvas — inlines the appropriate map SVG for the current page.
+  Selects the map illustration based on section slug or explicit map_name param.
+
+  Parameters (dict):
+    page        — page context (required)
+    map_name    — explicit map asset name, e.g. "floor-plan" (optional)
+    class       — additional CSS classes (optional)
+
+  Map selection:
+    getting-here      → maps/area-map.svg
+    finding-your-way  → maps/floor-plan.svg
+    nearby            → maps/neighbourhood-map.svg
+    schedule          → maps/agenda-overview.svg
+    explicit map_name → maps/{map_name}.svg
+*/}}
+
+{{ $page := .page }}
+{{ $class := .class | default "" }}
+{{ $mapName := .map_name | default "" }}
+
+{{/* Determine map name from section if not explicit */}}
+{{ if not $mapName }}
+  {{ $section := $page.Params.section | default "" }}
+  {{ if eq $section "getting-here" }}
+    {{ $mapName = "area-map" }}
+  {{ else if eq $section "finding-your-way" }}
+    {{ $mapName = "floor-plan" }}
+  {{ else if eq $section "nearby" }}
+    {{ $mapName = "neighbourhood-map" }}
+  {{ else if eq $section "schedule" }}
+    {{ $mapName = "agenda-overview" }}
+  {{ end }}
+{{ end }}
+
+{{ if $mapName }}
+  {{ $path := printf "illustrations/maps/%s.svg" $mapName }}
+  {{ $svg := resources.Get $path }}
+  {{ if $svg }}
+    <div class="sg-map__canvas {{ $class }}" role="figure" aria-label="Illustrated map of {{ $page.Title }}">
+      {{ if $class }}
+        {{ (replaceRE "<svg" (printf "<svg class=\"%s\"" $class) ($svg.Content)) | safeHTML }}
+      {{ else }}
+        {{ $svg.Content | safeHTML }}
+      {{ end }}
+
+      {{/* "You are here" marker — positioned via CSS on the canvas */}}
+      {{ if or (eq $mapName "floor-plan") (eq $mapName "area-map") }}
+        {{ partial "you-are-here" $page }}
+      {{ end }}
+    </div>
+  {{ else }}
+    <div class="sg-map__canvas sg-map__canvas--missing" role="figure" aria-label="Map illustration coming soon">
+      <div class="sg-map__placeholder" aria-hidden="true"></div>
+      {{ warnf "map-canvas: asset not found at assets/%s" $path }}
+    </div>
+  {{ end }}
+{{ else }}
+  <div class="sg-map__canvas sg-map__canvas--missing" role="figure" aria-label="Map illustration coming soon">
+    <div class="sg-map__placeholder" aria-hidden="true"></div>
+  </div>
+{{ end }}

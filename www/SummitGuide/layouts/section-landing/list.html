@@ -1,0 +1,35 @@
+{{/* Section landing — renders the section opener followed by all child spreads.
+Used for _index.md files inside content sections (kind=section,
+type=section-landing). Each child page is rendered inline as a spread so the
+reader scrolls through the section. */}} {{ define "main" }}
+<section
+  class="sg-section"
+  aria-labelledby="sg-section-{{ .Params.journey_step }}-title"
+  data-section="{{ .Params.journey_step }}"
+>
+  {{/* Section landing page */}} {{ partial "spread/section-landing" . }} {{/*
+  Section divider */}}
+  <div
+    class="sg-section-divider"
+    role="separator"
+    aria-label="Section {{ .Params.journey_step }} content"
+  >
+    <span class="sg-section-divider__mark" aria-hidden="true"
+      >&sect;{{ .Params.journey_step }}</span
+    >
+  </div>
+
+  {{/* Render child spreads in weight order */}} {{ range .Pages.ByWeight }} {{
+  $type := .Params.type | default "spread" }} {{ $spread := .Params.spread |
+  default "single-page" }} {{ $layout := .Params.layout | default "" }} {{ if eq
+  $type "schedule-day" }} {{ partial "spread/schedule-day" . }} {{ else if eq
+  $type "map" }} {{ partial "spread/map-view" . }} {{ else if eq $type
+  "directory" }} {{ partial "spread/directory" . }} {{ else if eq $type "spread"
+  }} {{ if eq $layout "full-bleed" }} {{ partial "spread/full-bleed" . }} {{
+  else if eq $layout "two-column" }} {{ partial "spread/two-column" . }} {{ else
+  }} {{ partial "spread/two-page" . }} {{ end }} {{ else }} {{ partial
+  "spread/two-page" . }} {{ end }} {{ end }}
+</section>
+
+{{/* Prev / Next section navigation */}} {{ partial "section-nav" (dict "Params"
+.Params "Site" .Site) }} {{ end }}

@@ -1,0 +1,50 @@
+{{/* Default list page — fallback for section pages without
+type=section-landing. Renders the section landing with child pages as spreads.
+*/}} {{ define "main" }}
+<section
+  class="sg-section"
+  aria-labelledby="sg-section-title"
+  data-section="{{ .Params.journey_step | default 0 }}"
+>
+  {{/* Section heading */}}
+  <article class="sg-page sg-page--single sg-page--section-landing">
+    <div class="sg-page__content">
+      <header class="sg-section-landing__header">
+        {{ with .Params.journey_step }}
+        <span class="sg-section-landing__number" aria-hidden="true"
+          >Section {{ . }}</span
+        >
+        {{ end }}
+        <h1 id="sg-section-title" class="sg-section-landing__title">
+          {{ .Title }}
+        </h1>
+        {{ with .Params.summary }}
+        <p class="sg-section-landing__summary">{{ . }}</p>
+        {{ end }}
+      </header>
+
+      <div class="sg-section-landing__body">{{ .Content }}</div>
+    </div>
+
+    {{ with .Params.page_number }}
+    <footer class="sg-page__number">
+      <span class="sg-page__number-text">{{ . }}</span>
+    </footer>
+    {{ end }}
+  </article>
+
+  {{/* Section divider */}} {{ with .Pages }}
+  <div class="sg-section-divider" role="separator"></div>
+  {{ end }} {{/* Render child pages as spreads */}} {{ range .Pages.ByWeight }}
+  {{ $type := .Params.type | default "spread" }} {{ $spread := .Params.spread |
+  default "single-page" }} {{ $layout := .Params.layout | default "" }} {{ if eq
+  $type "schedule-day" }} {{ partial "spread/schedule-day" . }} {{ else if eq
+  $type "map" }} {{ partial "spread/map-view" . }} {{ else if eq $type
+  "directory" }} {{ partial "spread/directory" . }} {{ else if eq $type "spread"
+  }} {{ if eq $layout "full-bleed" }} {{ partial "spread/full-bleed" . }} {{
+  else if eq $layout "two-column" }} {{ partial "spread/two-column" . }} {{ else
+  }} {{ partial "spread/two-page" . }} {{ end }} {{ else }} {{ partial
+  "spread/two-page" . }} {{ end }} {{ end }}
+</section>
+
+{{ partial "section-nav" (dict "Params" .Params "Site" .Site) }} {{ end }}

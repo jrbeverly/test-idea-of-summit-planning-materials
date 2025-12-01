@@ -1,0 +1,4 @@
+{{/* Dog-ear shortcode — for use in Markdown content. Usage: {{< dog-ear
+position="right" >}}Panel content{{< /dog-ear >}} */}} {{ $position := .Get
+"position" | default "right" }} {{ $content := .Inner }} {{ partial "dog-ear"
+(dict "position" $position "content" $content) }}

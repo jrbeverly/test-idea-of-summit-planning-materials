@@ -1,0 +1,16 @@
+{{/*
+  Dog-ear — a folded page-corner effect on a container.
+  Apply to any block to give it a turned-down (or turned-up) corner.
+
+  Parameters (dict):
+    position  — "right" (default) or "left"
+    content   — HTML content inside the dog-eared panel
+
+  Usage from template:
+    {{ partial "dog-ear" (dict "position" "left" "content" "<p>Panel content</p>") }}
+*/}}
+{{ $position := .position | default "right" }}
+{{ $content := .content | default "" }}
+<div class="sg-dog-ear{{ if eq $position "left" }} sg-dog-ear--left{{ end }}">
+  {{ $content | safeHTML }}
+</div>
